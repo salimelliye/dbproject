@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "build": "tailwindcss -i  input.css -o  static/dist/output.css",
+    "watch": "tailwindcss -i  input.css -o  static/dist/output.css --watch"
+  },
+  "name": "menacomm_reg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}

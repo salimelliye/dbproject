@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Django Tailwind</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" type="text/css" href='{% static "dist/output.css" %}'>
+		<link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
+	</head>
+
+
+	<body>
+		<section class="grid grid-cols-2 gap-4 items-center justify-center">
+			<div class="flex flex-col justify-center h-screen ml-10">
+				<h1 class="text-7xl color-primary font-extrabold"> Where are you going today? </h1>
+				<div class="mt-10">
+					<input placeholder="Enter something like Beirut..." class="border border-solid border-pink-400 rounded-xl w-2/3">
+					<button class="bg-light rounded pr-3 pt-1 pb-1 ml-2 hover:shadow-2xl bg-pink"><i class="fa-solid fa-magnifying-glass ml-3 color-light"></i></button>
+				</div>
+			</div>
+
+			<div class="flex flex-col justify-center items-center">
+				<h3 class="text-3xl font-extrabold color-light">Explore locations</h3>
+
+				<div class="m-10 grid grid-cols-2 md:grid-cols-3 gap-4 align-middle w-2/3 h-2/3">
+					<div class="grid gap-4">
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl hover:shadow-slate-600" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
+						</div>
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
+						</div>
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
+						</div>
+					</div>
+					<div class="grid gap-4">
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
+						</div>
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
+						</div>
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
+						</div>
+					</div>
+					<div class="grid gap-4">
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
+						</div>
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
+						</div>
+						<div>
+							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</section>
+
+
+
+	</body>
+</html>

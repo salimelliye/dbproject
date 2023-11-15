@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body{
+    font-family: 'Poppins';
+    background: linear-gradient(90deg, #f4f5f6 50%, #7f3af3 50%);
+}
+
+.bg-primary{
+    background-color: #070926;
+}
+
+.bg-sec{
+    background-color: #7f3af3;
+}
+
+.bg-light{
+    background-color: #f4f5f6;
+}
+
+.bg-pink{
+    background-color: #ff5ccb;
+}
+
+.color-primary{
+    color: #070926;
+}
+
+.color-sec{
+    color:#7f3af3;
+}
+
+.color-pink{
+    color:#ff5ccb;
+}
+
+.color-light{
+    color:#f4f5f6;
+}
+
+.shadow-hover:hover{
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}

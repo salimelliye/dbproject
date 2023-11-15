@@ -48,7 +48,7 @@ class Friend(BaseModel):
 
 class Trip(BaseModel):
     id_prefix = "T"
-    tripID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    tripID = models.AutoField( blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)
     orgID = models.ForeignKey('Organization', on_delete=models.CASCADE)
     plateNb = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
@@ -57,9 +57,10 @@ class Trip(BaseModel):
     departure = models.CharField(max_length=255)
     isFeatured = models.BooleanField(default=False)
     isBookmarked = models.BooleanField(default=False)
+    participants = models.ManyToManyField('Person', default='', null=True, blank=True, related_name='participants')
 
 class Vehicle(BaseModel):
-    plateNb = models.AutoField(max_length=10, blank=True, primary_key=True)
+    plateNb = models.AutoField( blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)
     model = models.CharField(max_length=255)
     make = models.CharField(max_length=255)
@@ -68,7 +69,7 @@ class Vehicle(BaseModel):
 
 class Organization(BaseModel):
     id_prefix="O"
-    orgID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    orgID = models.AutoField( blank=True, primary_key=True)
     orgName = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='org_logos/', blank=True)
     email = models.EmailField(unique=True)
@@ -76,9 +77,10 @@ class Organization(BaseModel):
 
 class Stop(BaseModel):
     id_prefix="S"
-    stopID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    stopID = models.AutoField( blank=True, primary_key=True)
     tripID = models.ForeignKey('Trip', on_delete=models.CASCADE)
     branchID = models.ForeignKey('Branch', on_delete=models.CASCADE)
+    location = models.CharField(max_length=500)
     startTime = models.DateTimeField()
     endTime = models.DateTimeField()
     isDestination = models.BooleanField()
@@ -89,7 +91,7 @@ class User_Post(BaseModel):
 
 class Branch(BaseModel):
     id_prefix="B"
-    branchID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    branchID = models.AutoField( blank=True, primary_key=True)
     orgID = models.ForeignKey('Organization', on_delete=models.CASCADE)
     location = models.CharField(max_length=255)
     image = models.ImageField(upload_to='branch_images/', blank=True)
@@ -97,7 +99,7 @@ class Branch(BaseModel):
 
 class Post(BaseModel):
     id_prefix="P"
-    postID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    postID = models.AutoField( blank=True, primary_key=True)
     tripID = models.ForeignKey('Trip', on_delete=models.CASCADE)
     personID = models.ForeignKey('Person', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='post_images/', blank=True)
@@ -106,10 +108,6 @@ class Post(BaseModel):
     timestamp = models.DateTimeField(auto_now_add=True)
     isBookmarked = models.BooleanField(default=False)
 
-class Participants(BaseModel):
-    personID = models.ForeignKey('Person', on_delete=models.CASCADE)
-    tripID = models.ForeignKey('Trip', on_delete=models.CASCADE)
-
 class Reaction(BaseModel):
     postID = models.ForeignKey('Post', on_delete=models.CASCADE)
     commentID = models.ForeignKey('Comment', on_delete=models.CASCADE)
@@ -117,7 +115,7 @@ class Reaction(BaseModel):
 
 class Advertisement(BaseModel):
     id_prefix="A"
-    adID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    adID = models.AutoField( blank=True, primary_key=True)
     postID = models.ForeignKey('Post', on_delete=models.CASCADE)
     duration = models.DateTimeField()
     branchID = models.ForeignKey('Branch', on_delete=models.CASCADE)
@@ -128,14 +126,14 @@ class Advertisement(BaseModel):
 
 class Comment(BaseModel):
     id_prefix="C"
-    commentID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    commentID = models.AutoField( blank=True, primary_key=True)
     postID = models.ForeignKey('Post', on_delete=models.CASCADE)
     personID = models.ForeignKey('Person', on_delete=models.CASCADE)
 
-# Modified a bit from LDM for simplicity, since emoji is linked to comment and comment is linked to post and person
+
 class Emoji(BaseModel):
     id_prefix="E"
-    emojiID = models.AutoField(max_length=50, blank=True, primary_key=True)
+    emojiID = models.AutoField( blank=True, primary_key=True)
     emojiType = models.CharField(max_length=255, choices=EMOJI_CHOICES)
     icon = models.ImageField(upload_to='emoji_icons/')
     commentID = models.ForeignKey('Comment', on_delete=models.CASCADE)
