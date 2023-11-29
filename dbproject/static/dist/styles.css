@@ -5,6 +5,9 @@
 
 body{
     font-family: 'Poppins';
+}
+
+#homeSection{
     background: linear-gradient(90deg, #f4f5f6 50%, #7f3af3 50%);
 }
 
