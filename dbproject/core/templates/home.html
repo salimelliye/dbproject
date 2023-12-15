@@ -18,6 +18,9 @@
     <!-- Navbar -->
     <nav class="bg-primary p-4">
         <ul class="flex justify-evenly space-x-4">
+            <li><a id="toggleSidebarOn" href="" class="text-white transition-all hover:text-gray-300">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </a></li>
             <li><a href="#" class="text-white transition-all hover:text-gray-300" title="Home">
                 <i class="fa-solid fa-house-user text-2xl"></i>
             </a></li>
@@ -39,7 +42,7 @@
     <!-- Main Section -->
     <div class="grid grid-rows-3 grid-cols-3 gap-4 items-center justify-center mx-20 my-10 h-screen">
         <!-- Welcome User -->
-        <div class="bg-purple-300 flex justify-center items-center p-4 row-start-1 col-start-1 col-span-full h-full text-center rounded-2xl">
+        <div class="bg-pink flex justify-center items-center p-4 row-start-1 col-start-1 col-span-full h-full text-center rounded-2xl">
             Welcome, [insert Django username here]
         </div>
         <!-- Tryps Modules -->
@@ -70,7 +73,7 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="flex h-screen">
+    <div class="flex h-screen" id="sidebar">
         <!-- Toggle button (for small screens) -->
         <div class="fixed z-20 inset-0 bg-black opacity-0">
         </div>
@@ -116,11 +119,16 @@
     <!-- Add JavaScript for Sidebar Toggle -->
     <script>
         const toggleButton = document.getElementById('toggleSidebar');
-        const sidebar = document.querySelector('.fixed.inset-y-0.left-0.w-64');
+        const toggleButtonOn = document.getElementById('toggleSidebarOn');
+        const sidebar = document.getElementById('sidebar');
+
 
         toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-            toggleButton.classList.toggle('hidden'); // Toggle hidden class on the button
+            sidebar.style.visibility = 'hidden';
+        });
+
+        toggleButtonOn.addEventListener('click', () => {
+            sidebar.style.visibility = 'visible';
         });
     </script>
 

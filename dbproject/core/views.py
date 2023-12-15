@@ -26,3 +26,10 @@ def home(request, *args, **kwargs):
 
     }
     return render(request, 'home.html', context)
+
+
+def create_trip(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'createTrip.html', context)
