@@ -6,6 +6,7 @@
 
 body{
     font-family: 'Poppins';
+    overflow-x: hidden;
 }
 
 #homeSection{
