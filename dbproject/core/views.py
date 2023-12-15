@@ -3,11 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 
 
-def home(request, *args, **kwargs):
+def landing(request, *args, **kwargs):
     context = {
 
     }
-    return render(request, 'home.html', context)
+    return render(request, 'landing.html', context)
 
 def sign_up(request, *args, **kwargs):
     context = {
@@ -20,3 +20,9 @@ def login(request, *args, **kwargs):
 
     }
     return render(request, 'login.html', context)
+
+def home(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'home.html', context)
