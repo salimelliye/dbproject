@@ -1,72 +1,129 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-    <title>Django Tailwind</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href='{% static "dist/output.css" %}'>
-		<link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryp - Home</title>
+    <!-- Add Tailwind CSS CDN link -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href='{% static "dist/output.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
+</head>
+<body class="font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-primary p-4">
+        <ul class="flex justify-evenly space-x-4">
+            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="Home">
+                <i class="fa-solid fa-house-user text-2xl"></i>
+            </a></li>
+            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="Feed">
+                <i class="fa-solid fa-star-of-life text-2xl"></i>
+            </a></li>
+            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="New Tryp">
+                <i class="fa-solid fa-car-on text-2xl"></i>
+            </a></li>
+            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="My Tryps">
+                <i class="fa-solid fa-book-atlas text-2xl"></i>
+            </a></li>
+            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="Profile">
+                <i class="fa-solid fa-user text-2xl"></i>
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Section -->
+    <div class="grid grid-rows-3 grid-cols-3 gap-4 items-center justify-center mx-20 my-10 h-screen">
+        <!-- Welcome User -->
+        <div class="bg-purple-300 flex justify-center items-center p-4 row-start-1 col-start-1 col-span-full h-full text-center rounded-2xl">
+            Welcome, [insert Django username here]
+        </div>
+        <!-- Tryps Modules -->
+        <div class="bg-green-300 flex justify-center items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
+            <!-- Your trip content here -->
+            Trip 1
+        </div>
+        <div class="bg-yellow-300 flex justify-center items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
+            <!-- Your trip content here -->
+            Trip 2
+        </div>
+        <div class="bg-blue-300 flex justify-center items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
+            <!-- Your trip content here -->
+            Trip 3
+        </div>
+
+        <!-- Calendar -->
+        <div class="bg-gray-400 flex justify-center items-center p-4 row-start-3 col-start-1 row-span-2 col-span-2 h-full rounded-2xl">
+            <!-- Calendar content here -->
+            Calendar
+        </div>
+
+        <!-- Ad Box -->
+        <div class="bg-red-500 flex justify-center items-center p-4 row-start-3 row-span-2 col-start-3 h-full text-center rounded-2xl">
+            <!-- Ad content here -->
+            Ad
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+        <!-- Toggle button (for small screens) -->
+        <div class="fixed z-20 inset-0 bg-black opacity-0">
+        </div>
+        <div class="fixed z-30 inset-y-0 left-0 w-64 bg-gray-800 overflow-x-hidden transition-transform transform ease-in-out duration-300">
+            <!-- Sidebar Content -->
+            <div class="flex items-center justify-between p-4">
+                <div class="text-2xl font-semibold text-white">Tryp</div>
+                <button id="toggleSidebar" class="text-gray-400 focus:outline-none">x
+                </button>
+            </div>
+            <!-- User Profile -->
+            <div class="p-4">
+                <div class="w-16 h-16 bg-gray-300 rounded-full"></div>
+            </div>
+            <!-- Sidebar Navigation -->
+            <nav class="mt-2 ml-4">
+                <ul class="space-y-2">
+                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Account
+                        </a>
+                    </li>
+                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Friends List
+                        </a>
+                    </li>
+                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Bookmarks
+                        </a>
+                    </li>
+                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Trips
+                        </a>
+                    </li>
+                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Vehicles
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Add JavaScript for Sidebar Toggle -->
+    <script>
+        const toggleButton = document.getElementById('toggleSidebar');
+        const sidebar = document.querySelector('.fixed.inset-y-0.left-0.w-64');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            toggleButton.classList.toggle('hidden'); // Toggle hidden class on the button
+        });
+    </script>
 
 
-	<body>
-		<section id="homeSection" class="grid grid-cols-2 gap-4 items-center justify-center">
-			<div class="flex flex-col justify-center h-screen ml-10">
-				<h1 class="text-7xl color-primary font-extrabold"> Where are you going today? </h1>
-				<div class="mt-10">
-					<input placeholder="Enter something like Beirut..." class="border border-solid border-pink-400 rounded-xl w-2/3">
-					<button class="bg-light rounded pr-3 pt-1 pb-1 ml-2 hover:shadow-2xl bg-pink"><i class="fa-solid fa-magnifying-glass ml-3 color-light"></i></button>
-				</div>
-			</div>
-
-			<div class="flex flex-col justify-center items-center">
-				<h3 class="text-3xl font-extrabold color-light">Explore locations</h3>
-
-				<div class="m-10 grid grid-cols-2 md:grid-cols-3 gap-4 align-middle w-2/3 h-2/3">
-					<div class="grid gap-4">
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl hover:shadow-slate-600" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-						</div>
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-						</div>
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-						</div>
-					</div>
-					<div class="grid gap-4">
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-						</div>
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-						</div>
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
-						</div>
-					</div>
-					<div class="grid gap-4">
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
-						</div>
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
-						</div>
-						<div>
-							<img class="h-auto max-w-full rounded-lg opacity-100 transition duration-700 ease-in-out hover:opacity-90 hover:drop-shadow-2xl" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-		</section>
-
-
-
-	</body>
+</body>
 </html>
