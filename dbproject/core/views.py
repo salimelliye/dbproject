@@ -39,3 +39,9 @@ def my_trips(request, *args, **kwargs):
 
     }
     return render(request, 'myTrips.html', context)
+
+def trip_details(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'tripDetails.html', context)
