@@ -27,6 +27,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('createTrip/', views.create_trip, name='createTrip'),
     path('myTrips/', views.my_trips, name='myTrips'),
-    path('tripDetails/', views.trip_details, name="tripDetails")
+    path('tripDetails/', views.trip_details, name="tripDetails"),
+    path('profile/', views.user_profile, name='userProfile')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

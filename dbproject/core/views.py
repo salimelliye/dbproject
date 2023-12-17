@@ -45,3 +45,9 @@ def trip_details(request, *args, **kwargs):
 
     }
     return render(request, 'tripDetails.html', context)
+
+def user_profile(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'profile.html', context)   
