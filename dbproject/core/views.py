@@ -51,3 +51,9 @@ def user_profile(request, *args, **kwargs):
 
     }
     return render(request, 'profile.html', context)   
+
+def feed(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'feed.html', context)   
