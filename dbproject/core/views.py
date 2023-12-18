@@ -9,11 +9,17 @@ def landing(request, *args, **kwargs):
     }
     return render(request, 'landing.html', context)
 
-def sign_up(request, *args, **kwargs):
+def sign_up_user(request, *args, **kwargs):
     context = {
 
     }
-    return render(request, 'signup.html', context)
+    return render(request, 'signupUser.html', context)
+
+def sign_up_org(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'signupOrg.html', context)
 
 def login(request, *args, **kwargs):
     context = {
