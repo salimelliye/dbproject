@@ -17,24 +17,23 @@ EMOJI_CHOICES = (
     ('STAR','STAR')
 )
 
-class BaseModel(models.Model):
-    id_prefix = '' # To be inherited
-
-    @classmethod
-    def generate_id(cls, *args, **kwargs):
-        current_year = str(datetime.now().year)[-2:]
-        max_id = cls.objects.aggregate(models.Max('id'))['id__max']
-        new_id = str(int(max_id[-4:]) + 1).zfill(4) if max_id else '0001'
-        return cls.id_prefix + current_year + new_id
+#    def generate_id(cls, *args, **kwargs):
+#         current_year = str(datetime.now().year)[-2:]
+#         max_id = cls.objects.aggregate(models.Max('id'))['id__max']
+#         new_id = str(int(max_id[-4:]) + 1).zfill(4) if max_id else '0001'
     
-    def save(self, *args, **kwargs):
-        if not getattr(self, self._meta.pk.attname):
-            setattr(self, self._meta.pk.attname, self.generate_id())
-        super(BaseModel, self).save(*args, **kwargs)
-    class Meta:
-        abstract = True
+#     def save(self, *args, **kwargs):
+#         if not self.person_id:
+#             # Get the last two digits of the current year
+#             current_year = str(datetime.now().year)[-2:]
+#             # Find the maximum project ID in the database and increment it
+#             max_id = Person.objects.aggregate(models.Max('person_id'))['person_id__max']
+#             new_id = str(int(max_id[-4:]) + 1).zfill(4) if max_id else '0001'  # If no existing records, start with '0001'
+#             self.person_id = 'P' + current_year + new_id  # Add 'p' prefix
+#         super(Person, self).save(*args, **kwargs)
+#     return cls.id_prefix + current_year + new_id
 
-class Person(BaseModel):
+class Person(models.Model):
     id_prefix = "U"
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     person_id = models.CharField(max_length=50, blank=True, primary_key=True)
@@ -42,11 +41,11 @@ class Person(BaseModel):
     image = models.ImageField(upload_to='person_images/', blank=True)
     dob = models.DateField()
 
-class Friend(BaseModel):
+class Friend(models.Model):
     personID = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='friends')
     friendID = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='user_friends')
 
-class Trip(BaseModel):
+class Trip(models.Model):
     id_prefix = "T"
     tripID = models.AutoField( blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -59,7 +58,7 @@ class Trip(BaseModel):
     isBookmarked = models.BooleanField(default=False)
     participants = models.ManyToManyField('Person', default='', null=True, blank=True, related_name='participants')
 
-class Vehicle(BaseModel):
+class Vehicle(models.Model):
     plateNb = models.AutoField( blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)
     model = models.CharField(max_length=255)
@@ -67,7 +66,7 @@ class Vehicle(BaseModel):
     color = models.CharField(max_length=255)
     nbSeats = models.PositiveIntegerField()
 
-class Organization(BaseModel):
+class Organization(models.Model):
     id_prefix="O"
     orgID = models.AutoField( blank=True, primary_key=True)
     orgName = models.CharField(max_length=255)
@@ -75,7 +74,7 @@ class Organization(BaseModel):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
 
-class Stop(BaseModel):
+class Stop(models.Model):
     id_prefix="S"
     stopID = models.AutoField( blank=True, primary_key=True)
     tripID = models.ForeignKey('Trip', on_delete=models.CASCADE)
@@ -85,11 +84,11 @@ class Stop(BaseModel):
     endTime = models.DateTimeField()
     isDestination = models.BooleanField()
 
-class User_Post(BaseModel):
+class User_Post(models.Model):
     personID = models.ForeignKey('Person', on_delete=models.CASCADE)
     postID = models.ForeignKey('Post', on_delete=models.CASCADE)
 
-class Branch(BaseModel):
+class Branch(models.Model):
     id_prefix="B"
     branchID = models.AutoField( blank=True, primary_key=True)
     orgID = models.ForeignKey('Organization', on_delete=models.CASCADE)
@@ -97,7 +96,7 @@ class Branch(BaseModel):
     image = models.ImageField(upload_to='branch_images/', blank=True)
     openingHours = models.CharField(max_length=255)
 
-class Post(BaseModel):
+class Post(models.Model):
     id_prefix="P"
     postID = models.AutoField( blank=True, primary_key=True)
     tripID = models.ForeignKey('Trip', on_delete=models.CASCADE)
@@ -108,12 +107,12 @@ class Post(BaseModel):
     timestamp = models.DateTimeField(auto_now_add=True)
     isBookmarked = models.BooleanField(default=False)
 
-class Reaction(BaseModel):
+class Reaction(models.Model):
     postID = models.ForeignKey('Post', on_delete=models.CASCADE)
     commentID = models.ForeignKey('Comment', on_delete=models.CASCADE)
     emojiID = models.ForeignKey('Emoji', on_delete=models.CASCADE)
 
-class Advertisement(BaseModel):
+class Advertisement(models.Model):
     id_prefix="A"
     adID = models.AutoField( blank=True, primary_key=True)
     postID = models.ForeignKey('Post', on_delete=models.CASCADE)
@@ -124,14 +123,14 @@ class Advertisement(BaseModel):
     adLink = models.URLField()
     image = models.ImageField(blank=True, upload_to='ad_images/')
 
-class Comment(BaseModel):
+class Comment(models.Model):
     id_prefix="C"
     commentID = models.AutoField( blank=True, primary_key=True)
     postID = models.ForeignKey('Post', on_delete=models.CASCADE)
     personID = models.ForeignKey('Person', on_delete=models.CASCADE)
 
 
-class Emoji(BaseModel):
+class Emoji(models.Model):
     id_prefix="E"
     emojiID = models.AutoField( blank=True, primary_key=True)
     emojiType = models.CharField(max_length=255, choices=EMOJI_CHOICES)
