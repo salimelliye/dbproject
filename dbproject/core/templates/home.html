@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href='{% static "dist/output.css" %}'>
     <link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
 </head>
-<body class="font-sans">
+<body class="h-full">
 
     <!-- Navbar -->
     <nav class="bg-primary p-4">
@@ -40,7 +40,7 @@
     </nav>
 
     <!-- Main Section -->
-    <div class="grid grid-rows-3 grid-cols-3 gap-4 items-center justify-center mx-20 my-10 h-screen">
+    <div class="grid grid-rows-3 grid-cols-3 gap-6 items-center justify-center mx-20 mt-10 ">
         <!-- Welcome User -->
         <div class="bg-purple-500 font-extrabold text-6xl flex justify-center items-center p-4 row-start-1 col-start-1 col-span-full h-full text-center rounded-2xl">
             {% if user %} What's on your mind, {{ request.user.first_name }} ? 
@@ -90,9 +90,9 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="flex h-screen" id="sidebar">
+    <div class="flex h-screen overflow-clip" id="sidebar">
         <!-- Toggle button (for small screens) -->
-        <div class="fixed z-20 inset-0 bg-black opacity-0">
+        <div class="fixed z-20 inset-0 bg-black opacity-10">
         </div>
         <div class="fixed z-30 inset-y-0 left-0 w-64 bg-gray-800 overflow-x-hidden transition-transform transform ease-in-out duration-300">
             <!-- Sidebar Content -->
@@ -112,19 +112,19 @@
                             Account
                         </a>
                     </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                    <li><a href="{% url 'userProfile' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
                             Friends List
                         </a>
                     </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                    <li><a href="{% url 'userProfile' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
                             Bookmarks
                         </a>
                     </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                    <li><a href="{% url 'myTrips' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
                             Trips
                         </a>
                     </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                    <li><a href="{% url 'userProfile' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
                             Vehicles
                         </a>
                     </li>
@@ -142,10 +142,12 @@
 
         toggleButton.addEventListener('click', () => {
             sidebar.style.visibility = 'hidden';
+            sidebar.classList.toggle('hidden');
         });
 
         toggleButtonOn.addEventListener('click', () => {
             sidebar.style.visibility = 'visible';
+            sidebar.classList.toggle('hidden');
         });
     </script>
 

@@ -34,6 +34,9 @@ urlpatterns = [
 
     #Authentication
     path('signupuser/', views.save_person, name='signupuser'),
-
+    
+    # Add friends list url + template 
+    # Add view for bookmarked trips
+    # Add view for vehicles
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
