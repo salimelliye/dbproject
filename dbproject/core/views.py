@@ -105,7 +105,7 @@ def save_person(request):
                 auth_login(request, user)  # Log in the user
 
                 # Redirect the user to the home page
-                return redirect('landing')
+                return redirect('home')
             else:
                 error_message = 'User authentication failed. Please try logging in.'
                 messages.error(request, error_message)
