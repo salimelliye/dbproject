@@ -28,7 +28,7 @@ class Person(models.Model):
     def save(self, *args, **kwargs):
         if not self.personID:
             current_year = str(datetime.now().year)[-2:]
-            max_id = Person.objects.aggregate(models.Max('person_id'))['person_id__max']
+            max_id = Person.objects.aggregate(models.Max('personID'))['personID__max']
             new_id = str(int(max_id[-4:]) + 1).zfill(4) if max_id else '0001'  
             self.personID = 'P' + current_year + new_id  
         super(Person, self).save(*args, **kwargs)
