@@ -22,10 +22,14 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.landing , name='landing'),
-    path('signup/', views.sign_up, name='signup'),
+    path('signupUser/', views.sign_up_user, name='signupUser'),
+    path('signupOrg/', views.sign_up_org, name='signupOrg'),
     path('login/', views.login, name='login'),
     path('home/', views.home, name='home'),
     path('createTrip/', views.create_trip, name='createTrip'),
-    path('myTrips/', views.my_trips, name='myTrips')
+    path('myTrips/', views.my_trips, name='myTrips'),
+    path('tripDetails/', views.trip_details, name="tripDetails"),
+    path('profile/', views.user_profile, name='userProfile'),
+    path('feed/', views.feed, name='feed')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
