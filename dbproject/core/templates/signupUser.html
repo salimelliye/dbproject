@@ -13,7 +13,7 @@
 	</head>
 
     <body  class="bg-sec">
-        <section class="bg-slate-200  h-screen w-screen">
+        <section class="bg-slate-200 pb-5 h-full w-screen">
             <div class="flex flex-col items-center justify-center mx-auto w-1/3">
                 <div class="w-full bg-light rounded-lg shadow p-5 mt-10 justify-center">
                     <div class="px-6">
@@ -80,6 +80,9 @@
                             <button type="submit" class="w-full text-white bg-sec hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-hover">Create an account</button>
                             <p class="text-sm font-light color-primary">
                                 Already have an account? <a href="{% url 'login' %}" class="font-medium color-sec hover:underline dark:text-primary-500">Login here</a>
+                            </p>
+                            <p class="text-sm font-light color-primary">
+                                Are you an Organization? <a href="{% url 'signupOrg' %}" class="font-medium color-sec hover:underline dark:text-primary-500">SignUp here instead</a>
                             </p>
                         </form>
                     </div>
