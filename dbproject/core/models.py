@@ -21,16 +21,16 @@ EMOJI_CHOICES = (
 
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    person_id = models.CharField(max_length=50, blank=True, primary_key=True)
+    personID = models.CharField(max_length=50, blank=True, primary_key=True)
     gender = models.CharField(max_length=100,choices=GENDER_CHOICES)
     image = models.ImageField(upload_to='person_images/', blank=True)
     dob = models.DateField()
     def save(self, *args, **kwargs):
-        if not self.person_id:
+        if not self.personID:
             current_year = str(datetime.now().year)[-2:]
             max_id = Person.objects.aggregate(models.Max('person_id'))['person_id__max']
             new_id = str(int(max_id[-4:]) + 1).zfill(4) if max_id else '0001'  
-            self.person_id = 'P' + current_year + new_id  
+            self.personID = 'P' + current_year + new_id  
         super(Person, self).save(*args, **kwargs)
 
 class Friend(models.Model):
