@@ -1,4 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import *
+from django.contrib import messages
+from .forms import *
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import login as auth_login
 
 # Create your views here.
 
@@ -46,20 +52,56 @@ def my_trips(request, *args, **kwargs):
     }
     return render(request, 'myTrips.html', context)
 
-def trip_details(request, *args, **kwargs):
-    context = {
 
-    }
-    return render(request, 'tripDetails.html', context)
 
-def user_profile(request, *args, **kwargs):
-    context = {
+#Authentication
+def save_person(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        gender = request.POST.get('gender')
+        date_of_birth = request.POST.get('date_of_birth')
 
-    }
-    return render(request, 'profile.html', context)   
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username').lower() 
+            email = username
+            password = form.cleaned_data.get('password2')
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+            )
+            user.first_name = form.cleaned_data['first_name'].lower().capitalize()
+            user.last_name = form.cleaned_data['last_name'].lower().capitalize()
+            user.save()
 
-def feed(request, *args, **kwargs):
-    context = {
+            person = Person.objects.create(
+                user=user,
+                gender=gender,
+                dob=date_of_birth,
+            )
+            
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                auth_login(request, user)  # Log in the user
 
-    }
-    return render(request, 'feed.html', context)   
+                # Redirect the user to the home page
+                return redirect('landing')
+            else:
+                error_message = 'User authentication failed. Please try logging in.'
+                messages.error(request, error_message)
+
+        else:
+            print('Form is not valid. Errors:')
+            print(form.errors)
+
+            for field in form:
+                for error in field.errors:
+                    if "A user with that username already exists." in error:
+                        # Replace the generic error message with a custom one for the email field
+                        form.add_error('email', forms.ValidationError(
+                            'A user with this email already exists.'))
+
+    context = {'form': form}
+    return render(request, 'signup.html', context)
+
