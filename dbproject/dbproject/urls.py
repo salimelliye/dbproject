@@ -30,6 +30,10 @@ urlpatterns = [
     path('myTrips/', views.my_trips, name='myTrips'),
     path('tripDetails/', views.trip_details, name="tripDetails"),
     path('profile/', views.user_profile, name='userProfile'),
-    path('feed/', views.feed, name='feed')
+    path('feed/', views.feed, name='feed'),
+
+    #Authentication
+    path('signupuser/', views.save_person, name='signupuser'),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

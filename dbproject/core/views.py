@@ -53,6 +53,26 @@ def my_trips(request, *args, **kwargs):
     return render(request, 'myTrips.html', context)
 
 
+def trip_details(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'tripDetails.html', context)
+
+
+def user_profile(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'profile.html', context)
+
+
+
+def feed(request, *args, **kwargs):
+    context = {
+
+    }
+    return render(request, 'feed.html', context)
 
 #Authentication
 def save_person(request):
@@ -63,11 +83,10 @@ def save_person(request):
 
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username').lower() 
-            email = username
+            email = form.cleaned_data.get('email').lower() 
             password = form.cleaned_data.get('password2')
             user = User.objects.create_user(
-                username=username,
+                username=email,
                 email=email,
                 password=password,
             )
@@ -103,5 +122,5 @@ def save_person(request):
                             'A user with this email already exists.'))
 
     context = {'form': form}
-    return render(request, 'signup.html', context)
+    return render(request, 'signupUser.html', context)
 
