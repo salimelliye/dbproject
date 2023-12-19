@@ -40,11 +40,35 @@ def sign_up_org(request, *args, **kwargs):
     }
     return render(request, 'signupOrg.html', context)
 
-def login(request, *args, **kwargs):
+
+
+def user_login(request):
     context = {
 
-    }
+    } 
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == 'POST':
+        email = request.POST.get('email').lower()
+        password = request.POST.get('password')
+        try:
+          user = User.objects.get(email__iexact=email)
+        except User.DoesNotExist:
+          user = None
+
+        if user is not None and user.check_password(password):
+            if Person.objects.filter(user=user).exists():
+                login(request, user)
+                return redirect('home')
+        else:
+            error_message = 'Invalid email or password. Please try again.'
+            messages.error(request, error_message)
+    error_messages = messages.get_messages(request)
+    context['error_messages'] = error_messages
     return render(request, 'login.html', context)
+
+
 
 def home(request, *args, **kwargs):
     context = {
