@@ -27,6 +27,7 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('home/', views.home, name='home'),
     path('createTrip/', views.create_trip, name='createTrip'),
+    path('createBranch/', views.create_branch, name='createBranch'),
     path('myTrips/', views.my_trips, name='myTrips'),
     path('tripDetails/', views.trip_details, name="tripDetails"),
     path('profile/', views.user_profile, name='userProfile'),
