@@ -23,6 +23,7 @@
             <a href="{% url 'tripDetails' trip.tripID%}" class="hover:underline">View Details</a>
         </div>
         {% if trip.image %}
+        <img class="w-full h-32 object-cover object-center" src="{{trip.image.url}}" alt="Trip Image">
         {%else%}
         <img class="w-32 h-32 rounded-full object-cover object-center" src={{img_placeholder}} alt="Trip Image">
         {%endif%}

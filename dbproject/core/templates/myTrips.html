@@ -13,7 +13,7 @@
                 {% if trip.image %}
                 <img class="w-full h-32 object-cover object-center" src="{{trip.image.url}}" alt="Trip Image">
                 {% else %}
-                <img class="w-full h-32 object-cover object-center" src="https://via.placeholder.com/300" alt="Trip Image">
+                <img class="w-full h-32 object-cover object-center" src={{img_placeholder}} alt="Trip Image">
                 {% endif %}
                 <div class="p-4">
                     <h2 class="text-xl font-bold mb-2">{{trip.name}}</h2>

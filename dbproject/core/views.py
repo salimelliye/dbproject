@@ -100,8 +100,8 @@ def create_branch(request, *args, **kwargs):
 def my_trips(request, *args, **kwargs):
     my_trips = Trip.objects.filter(userID = request.user.person).order_by('-rideDate')
     context = {
-        'my_trips' : my_trips
-
+        'my_trips' : my_trips,
+        'img_placeholder': random.choice(img_placeholders)
     }
     return render(request, 'myTrips.html', context)
 
