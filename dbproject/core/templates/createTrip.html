@@ -8,19 +8,23 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl color-primary">
                     Create a Trip
                 </h1>
-                <form class="grid grid-cols-2 gap-4" action="#" enctype="multipart/form-data">
+                <form class="grid grid-cols-2 gap-4" action="{% url 'createTrip' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div>
                         <label for="tripName" class="block mt-2 mb-2 text-sm font-medium color-primary">Trip Name</label>
-                        <input type="text" name="tripName" id="tripName" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Trip Name" required="">
+                        <input name="name" type="text" name="tripName" id="tripName" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Trip Name" required="">
                     </div>
                     <div>
                         <label for="date" class="block mt-2 mb-2 text-sm font-medium color-primary">Date</label>
-                        <input type="date" name="date" id="date" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                        <input type="datetime-local" name="ride_date"  class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
                     </div>
                     <div>
-                        <label for="time" class="block mt-2 mb-2 text-sm font-medium color-primary">Departure Time</label>
-                        <input type="time" name="time" id="time" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                        <label for="time" class="block mt-2 mb-2 text-sm font-medium color-primary">Organization</label>
+                        <select name="org_id" id="organization" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                            {% for organization in organizations %}
+                            <option value="{{organization.orgID}}">{{organization.orgName}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div>
                         <label for="images" class="block mt-2 mb-2 text-sm font-medium color-primary">Images</label>
@@ -31,24 +35,25 @@
                         <textarea name="description" id="description" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Trip Description" required=""></textarea>
                     </div>
                     <div class="col-span-2">
-                        <label for="location" class="block mt-2 mb-2 text-sm font-medium color-primary">Location</label>
-                        <input type="text" name="location" id="location" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Trip Location" required="">
+                        <label for="location" class="block mt-2 mb-2 text-sm font-medium color-primary">Departure</label>
+                        <input type="text" name="departure" id="location" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Trip Location" required="">
                     </div>
                     <div>
                         <label for="participants" class="block mt-2 mb-2 text-sm font-medium color-primary">Participants</label>
-                        <select  name="car" id="car" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                        <select multiple  name="participant_ids" id="participants"  class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
                             {% for friend in my_friends %}
-                            <option value="car1">{{friend.friendID.user.first_name}} {{friend.friendID.user.last_name}}</option>
+                            <option value="{{friend.personID}}">{{friend.friendID.user.first_name}} {{friend.personID}} {{friend.friendID.user.last_name}} {{friend.person.personID}}</option>
                             {% endfor %}
                         </select>
                     </div>
+                    
                     <div>
                         <label for="car" class="flex justify-between mt-2 mb-2 text-sm font-medium color-primary">Choose a Car
                             <a href="{% url 'userProfile'%}" class="color-sec no-underline"> No car yet? Start by adding a Car!</a>
                         </label>
-                        <select mu name="car" id="car" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                        <select name="plate_number" id="car" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
                             {% for car in my_cars %}
-                            <option value="car1">{{car.make}}-{{car.model}}</option>
+                            <option value="{{car.plateNb}}">{{car.make}}-{{car.model}}</option>
                             {% endfor %}
                         </select>
                     </div>

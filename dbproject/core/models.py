@@ -40,18 +40,19 @@ class Friend(models.Model):
 
 class Trip(models.Model):
     id_prefix = "T"
-    tripID = models.AutoField( blank=True, primary_key=True)
+    name = models.CharField(max_length=200, null=True)
+    tripID = models.CharField(max_length=500, blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)
-    orgID = models.ForeignKey('Organization', on_delete=models.CASCADE, blank=True)
+    orgID = models.ForeignKey('Organization', on_delete=models.CASCADE, blank=True, null=True)
     plateNb = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
-    rideDate = models.DateTimeField() # removed startTime = models.DateTimeField() to avoid repetition
+    rideDate = models.DateTimeField() 
+    description = models.TextField(null=True)
     nbParticipants = models.PositiveIntegerField()
     departure = models.CharField(max_length=255)
     isCompleted = models.BooleanField(default=False)
     isFeatured = models.BooleanField(default=False)
     isBookmarked = models.BooleanField(default=False)
     participants = models.ManyToManyField('Person', default='', null=True, blank=True, related_name='participants')
-
     def save(self, *args, **kwargs):
         if not self.tripID:
             current_year = str(datetime.now().year)[-2:]
@@ -59,6 +60,7 @@ class Trip(models.Model):
             new_id = str(int(max_id[-4:]) + 1).zfill(4) if max_id else '0001'  
             self.tripID = self.id_prefix + current_year + new_id  
         super(Trip, self).save(*args, **kwargs)
+
 
 class Vehicle(models.Model):
     plateNb = models.AutoField( blank=True, primary_key=True)
@@ -70,7 +72,7 @@ class Vehicle(models.Model):
 
 class Organization(models.Model):
     id_prefix="O"
-    orgID = models.AutoField( blank=True, primary_key=True)
+    orgID = models.CharField(max_length=10, unique=True, primary_key=True, blank=True)
     orgName = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='org_logos/', blank=True)
     email = models.EmailField(unique=True)

@@ -179,41 +179,46 @@ def check_email_availability(request):
 
 
 def create_trip(request):
- if request.method == 'POST':
     logged_person = request.user.person
     my_cars = Vehicle.objects.filter(userID=logged_person).order_by('-plateNb')
     my_friends = Friend.objects.filter(personID=logged_person)
-    userID = request.user.person
-    orgID = request.POST.get('org_id')  
-    plateNb = request.POST.get('plate_number')  
-    ride_date = request.POST.get('ride_date') 
-    nb_participants = request.POST.get('num_participants')  
-    departure = request.POST.get('departure_location')
-    ride_date = datetime.strptime(ride_date, '%Y-%m-%d %H:%M:%S')
-    vehicle = get_object_or_404(Vehicle, plateNb=plateNb)
-    organization = get_object_or_404(Organization, id=orgID)
-    trip = Trip.objects.create(
-            userID=userID,
-            orgID=organization,
-            plateNb=vehicle,
-            rideDate=ride_date,
-            nbParticipants=nb_participants,
-            departure=departure,
-            isCompleted=False,
-            isFeatured=False,
-            isBookmarked=False
-        )
-    participant_ids = request.POST.getlist('participant_ids')  
-    if participant_ids:
-            for participant_id in participant_ids:
-                participant = Person.objects.get(pk=participant_id)
-                trip.participants.add(participant)
+    organizations = Organization.objects.all()
+
+    if request.method == 'POST':
+        orgID = request.POST.get('org_id')  
+        description = request.POST.get('description')  
+        userID = request.user.person
+        orgID = request.POST.get('org_id')  
+        plateNb = request.POST.get('plate_number')  
+        ride_date = request.POST.get('ride_date') 
+        departure = request.POST.get('departure')
+        ride_date = datetime.strptime(ride_date, '%Y-%m-%dT%H:%M')
+        vehicle = get_object_or_404(Vehicle, plateNb=plateNb)
+        organization = get_object_or_404(Organization, orgID=orgID)
+        trip = Trip.objects.create(
+                userID=userID,
+                orgID=organization,
+                plateNb=vehicle,
+                rideDate=ride_date,
+                departure=departure,
+                isCompleted=False,
+                isFeatured=False,
+                isBookmarked=False,
+                description = description,
+                nbParticipants = vehicle.nbSeats
+            )
+        participant_ids = request.POST.getlist('participant_ids')  
+        if participant_ids:
+                for participant_id in participant_ids:
+                    participant = Person.objects.get(pk=participant_id)
+                    trip.participants.add(participant)
         
 
     context={
 
         'my_cars' : my_cars,
-        'my_friends' : my_friends
+        'my_friends' : my_friends,
+        'organizations' : organizations,
  
     }
 
