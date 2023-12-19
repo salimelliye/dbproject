@@ -14,7 +14,7 @@
     </div>
     <!-- Trips Modules -->
     {% if my_trips %}
-    {% for trip in my_trips%}
+    {% for trip in my_trips|slice:":3"%}
     <div class="border-sec flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
         <div class="p-4 flex flex-col items-start">
             <h2 class="text-2xl font-bold mb-2">{{trip.name}}</h2>
