@@ -16,25 +16,25 @@
 <body class="h-full">
 
     <!-- Navbar -->
-    <nav class="bg-primary p-4">
+    <nav class="bg-white p-4">
         <ul class="flex justify-evenly space-x-4">
-            <li><a id="toggleSidebarOn" href="" class="text-white transition-all hover:text-gray-300">
-                <i class="fa-solid fa-bars text-2xl"></i>
+            <li><a id="toggleSidebarOn" href="" class="transition-all hover:text-purple-500">
+                <i class="fa-solid fa-bars text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'home' %}" class="text-white transition-all hover:text-gray-300" title="Home">
-                <i class="fa-solid fa-house-user text-2xl"></i>
+            <li><a href="{% url 'home' %}" class="transition-all hover:text-purple-500 {% if request.path == '/home/' %}text-purple-500{% endif %}" title="Home">
+                <i class="fa-solid fa-house-user text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'feed' %}" class="text-white transition-all hover:text-gray-300" title="Feed">
-                <i class="fa-solid fa-star-of-life text-2xl"></i>
+            <li><a href="{% url 'feed' %}" class="transition-all hover:text-purple-500 {% if request.path == '/feed/' %}text-purple-500{% endif %}" title="Feed">
+                <i class="fa-solid fa-star-of-life text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'createTrip' %}" class="text-white transition-all hover:text-gray-300" title="New Trip">
-                <i class="fa-solid fa-car-on text-2xl"></i>
+            <li><a href="{% url 'createTrip' %}" class="transition-all hover:text-purple-500 {% if request.path == '/createTrip/' %}text-purple-500{% endif %}" title="New Trip">
+                <i class="fa-solid fa-car-on text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'myTrips' %}" class="text-white transition-all hover:text-gray-300" title="My Trips">
-                <i class="fa-solid fa-book-atlas text-2xl"></i>
+            <li><a href="{% url 'myTrips' %}" class="transition-all hover:text-purple-500 {% if request.path == '/myTrips/' %}text-purple-500{% endif %}" title="My Trips">
+                <i class="fa-solid fa-book-atlas text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'userProfile' %}" class="text-white transition-all hover:text-gray-300" title="Profile">
-                <i class="fa-solid fa-user text-2xl"></i>
+            <li><a href="{% url 'userProfile' %}" class="transition-all hover:text-purple-500 {% if request.path == '/userProfile/' %}text-purple-500{% endif %}" title="Profile">
+                <i class="fa-solid fa-user text-3xl"></i>
             </a></li>
         </ul>
     </nav>
@@ -42,37 +42,40 @@
     <!-- Main Section -->
     <div class="grid grid-rows-3 grid-cols-3 gap-6 items-center justify-center mx-20 mt-10 ">
         <!-- Welcome User -->
-        <div class="bg-purple-500 font-extrabold text-6xl flex justify-center items-center p-4 row-start-1 col-start-1 col-span-full h-full text-center rounded-2xl">
-            {% if user %} What's on your mind, {{ request.user.first_name }} ? 
+        <div class=" flex flex-col justify-center items-center p-4 row-start-1 col-start-1 col-span-full gap-4 h-full text-center rounded-2xl">
+            <span class="font-extrabold text-6xl text-purple-500">
+            {% if user %}Hey {{ request.user.first_name }}, did you know that 
             {% else %} Welcome! {% endif %}
+            </span>
+            {{fun_fact}}
         </div>
         <!-- Trips Modules -->
-        <div class="bg-green-300 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl transition duration-300 ease-in-out transform hover:bg-green-400 hover:scale-95">
+        <div class="bg-purple-400 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
             <div class="p-4 flex flex-col items-start">
-                <h2 class="text-xl font-bold mb-2">Trip 1</h2>
+                <h2 class="text-2xl font-bold mb-2">Trip 1</h2>
                 <p class="text-gray-700 mb-2">Date: February 1, 2023</p>
                 <p class="text-gray-700 mb-2">Location: Beach, Country</p>
-                <a href="#" class="color-pink hover:underline">View Details</a>
+                <a href="#" class="hover:underline">View Details</a>
             </div>
             <img class="w-32 h-32 rounded-full object-cover object-center" src="https://via.placeholder.com/300" alt="Trip Image">
         </div>
         
-        <div class="bg-yellow-300 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl transition duration-300 ease-in-out transform hover:scale-95">
+        <div class="bg-purple-400 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl ">
             <div class="p-4 flex flex-col items-start">
-                <h2 class="text-xl font-bold mb-2">Trip 2</h2>
+                <h2 class="text-2xl font-bold mb-2">Trip 2</h2>
                 <p class="text-gray-700 mb-2">Date: February 1, 2023</p>
                 <p class="text-gray-700 mb-2">Location: Beach, Country</p>
-                <a href="#" class="color-pink hover:underline">View Details</a>
+                <a href="#" class="hover:underline">View Details</a>
             </div>
             <img class="w-32 h-32 rounded-full object-cover object-center" src="https://via.placeholder.com/300" alt="Trip Image">
         </div>
         
-        <div class="bg-blue-300 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl transition duration-300 ease-in-out transform hover:scale-95">
+        <div class="bg-purple-400 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
             <div class="p-4 flex flex-col items-start">
-                <h2 class="text-xl font-bold mb-2">Upcoming: Trip 3</h2>
+                <h2 class="text-2xl font-bold mb-2">Upcoming: Trip 3</h2>
                 <p class="text-gray-700 mb-2">Date: February 1, 2023</p>
                 <p class="text-gray-700 mb-2">Location: Beach, Country</p>
-                <a href="#" class="color-pink hover:underline">View Details</a>
+                <a href="#" class="hover:underline">View Details</a>
             </div>
             <img class="w-32 h-32 rounded-full object-cover object-center" src="https://via.placeholder.com/300" alt="Trip Image">
         </div>

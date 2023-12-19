@@ -13,29 +13,6 @@
     <link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="bg-primary p-4">
-        <ul class="flex justify-evenly space-x-4">
-            <li><a id="toggleSidebarOn" href="" class="text-white transition-all hover:text-gray-300">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </a></li>
-            <li><a href="{% url 'home' %}" class="text-white transition-all hover:text-gray-300" title="Home">
-                <i class="fa-solid fa-house-user text-2xl"></i>
-            </a></li>
-            <li><a href="{% url 'feed' %}" class="text-white transition-all hover:text-gray-300" title="Feed">
-                <i class="fa-solid fa-star-of-life text-2xl"></i>
-            </a></li>
-            <li><a href="{% url 'createTrip' %}" class="text-white transition-all hover:text-gray-300" title="New Trip">
-                <i class="fa-solid fa-car-on text-2xl"></i>
-            </a></li>
-            <li><a href="{% url 'myTrips' %}" class="text-white transition-all hover:text-gray-300" title="My Trips">
-                <i class="fa-solid fa-book-atlas text-2xl"></i>
-            </a></li>
-            <li><a href="{% url 'userProfile' %}" class="text-white transition-all hover:text-gray-300" title="Profile">
-                <i class="fa-solid fa-user text-2xl"></i>
-            </a></li>
-        </ul>
-    </nav>
     <section class="bg-slate-200 h-full w-screen pb-4">
         <div class="flex flex-col items-center justify-center mx-auto max-w-6xl">
             <div class="w-full bg-light rounded-lg shadow p-5 mt-10 justify-center">

@@ -1,5 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  daisyui: {
+    themes: [
+      {
+        mytheme: {        
+          "primary": "#ffffff",
+          "secondary": "#7f3af3",        
+          "accent": "#000000",        
+          "neutral": "#ffffff",        
+          "base-100": "#ffffff",       
+          "info": "#ffffff",        
+          "success": "#7f3af3",      
+          "warning": "#ffffff",     
+          "error": "#ffffff",
+        },
+      },
+    ],
+  },
   content: ["core/**/*.html",
   "static/**/*.html",
   "static/dist/output.css",
@@ -30,6 +47,8 @@ module.exports = {
       },
     }
   },
-  plugins: [],
+  plugins: [
+    require("daisyui"),
+  ],
 }
 

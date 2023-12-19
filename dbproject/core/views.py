@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
@@ -7,6 +8,18 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth import login as auth_login
 
 # Create your views here.
+lebanon_facts = [
+    "Lebanon introduced the world to mezze, a delightful array of small dishes like hummus, tabbouleh, and falafel. Perfect for sharing.",
+    "Lebanon is home to some of the oldest olive trees globally, with olive oil being a staple in Lebanese cuisine for thousands of years.",
+    "Explore the ancient ruins of Baalbek, where you'll find Roman temples so well-preserved, they make time travel feel possible.",
+    "Lebanon boasts Jeita Grotto, a natural wonder featuring breathtaking limestone formations and an underground river.",
+    "Lebanon is a linguistic playground; Arabic is official, but French and English are widely spoken, reflecting its diverse heritage.",
+    "The coastal city of Byblos, one of the oldest continuously inhabited cities, showcases Lebanon's deep connection to Phoenician history.",
+    "Indulge in Lebanese sweets like baklava and ma'amoul, where every bite is a burst of honey, nuts, and exquisite flavors.",
+    "Sip on Lebanese coffee, a symbol of hospitality, served strong and often with a touch of cardamom.",
+    "Lebanon's compact size allows you to ski in the morning in the mountain resorts and relax on the Mediterranean beaches in the afternoon.",
+    "Visit the Cedar Forest, a UNESCO site, and stand among ancient cedar trees, some over a thousand years old, symbolizing Lebanon's endurance."
+]
 
 
 def landing(request, *args, **kwargs):
@@ -35,7 +48,7 @@ def login(request, *args, **kwargs):
 
 def home(request, *args, **kwargs):
     context = {
-
+        "fun_fact": random.choice(lebanon_facts)
     }
     return render(request, 'home.html', context)
 
