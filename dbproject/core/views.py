@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 lebanon_facts = [
     "Lebanon introduced the world to mezze, a delightful array of small dishes like hummus, tabbouleh, and falafel. Perfect for sharing.",
@@ -174,41 +176,45 @@ def check_email_availability(request):
             response_data = {"exists": False}
     return JsonResponse(response_data)
 
+
+
 def create_trip(request):
-    if request.method == 'POST':
-        form = CreateTripForm(request.POST, request.FILES)
+ if request.method == 'POST':
+    logged_person = request.user.person
+    my_cars = Vehicle.objects.filter(userID=logged_person).order_by('-plateNb')
+    my_friends = Friend.objects.filter(personID=logged_person)
+    userID = request.user.person
+    orgID = request.POST.get('org_id')  
+    plateNb = request.POST.get('plate_number')  
+    ride_date = request.POST.get('ride_date') 
+    nb_participants = request.POST.get('num_participants')  
+    departure = request.POST.get('departure_location')
+    ride_date = datetime.strptime(ride_date, '%Y-%m-%d %H:%M:%S')
+    vehicle = get_object_or_404(Vehicle, plateNb=plateNb)
+    organization = get_object_or_404(Organization, id=orgID)
+    trip = Trip.objects.create(
+            userID=userID,
+            orgID=organization,
+            plateNb=vehicle,
+            rideDate=ride_date,
+            nbParticipants=nb_participants,
+            departure=departure,
+            isCompleted=False,
+            isFeatured=False,
+            isBookmarked=False
+        )
+    participant_ids = request.POST.getlist('participant_ids')  
+    if participant_ids:
+            for participant_id in participant_ids:
+                participant = Person.objects.get(pk=participant_id)
+                trip.participants.add(participant)
+        
 
-        if form.is_valid():
-            # Extract data from the form
-            trip_name = form.cleaned_data['tripName']
-            date = form.cleaned_data['date']
-            time = form.cleaned_data['time']
-            images = form.cleaned_data['images']
-            description = form.cleaned_data['description']
-            location = form.cleaned_data['location']
-            participants = form.cleaned_data['participants']
-            car = form.cleaned_data['car']
+    context={
 
-            # Assuming you have the current user ID, you can get it from the request
-            user_id = request.user.id
+        'my_cars' : my_cars,
+        'my_friends' : my_friends
+ 
+    }
 
-            # Save data to the Trip model
-            trip = Trip.objects.create(
-                userID=user_id,
-                tripName=trip_name,
-                rideDate=datetime.combine(date, time),
-                description=description,
-                location=location,
-                nbParticipants=participants,
-                plateNb=car,
-            )
-
-            # Save images if provided
-            if images:
-                for image in images:
-                    trip.images.create(image=image)
-
-            return redirect('myTrips')
-    else:
-        form = CreateTripForm()
-    return render(request, 'createTrip.html', {'form': form})
+    return render(request, 'createTrip.html', context)

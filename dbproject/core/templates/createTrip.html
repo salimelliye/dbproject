@@ -36,16 +36,20 @@
                     </div>
                     <div>
                         <label for="participants" class="block mt-2 mb-2 text-sm font-medium color-primary">Participants</label>
-                        <input type="text" name="participants" id="participants" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Participants" required="">
+                        <select  name="car" id="car" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                            {% for friend in my_friends %}
+                            <option value="car1">{{friend.friendID.user.first_name}} {{friend.friendID.user.last_name}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div>
                         <label for="car" class="flex justify-between mt-2 mb-2 text-sm font-medium color-primary">Choose a Car
                             <a href="{% url 'userProfile'%}" class="color-sec no-underline"> No car yet? Start by adding a Car!</a>
                         </label>
-                        <select name="car" id="car" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                            <option value="car1">Car 1</option>
-                            <option value="car2">Car 2</option>
-                            <option value="car3"> Car 3 </option>
+                        <select mu name="car" id="car" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                            {% for car in my_cars %}
+                            <option value="car1">{{car.make}}-{{car.model}}</option>
+                            {% endfor %}
                         </select>
                     </div>
 

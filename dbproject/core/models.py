@@ -42,7 +42,7 @@ class Trip(models.Model):
     id_prefix = "T"
     tripID = models.AutoField( blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)
-    orgID = models.ForeignKey('Organization', on_delete=models.CASCADE)
+    orgID = models.ForeignKey('Organization', on_delete=models.CASCADE, blank=True)
     plateNb = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
     rideDate = models.DateTimeField() # removed startTime = models.DateTimeField() to avoid repetition
     nbParticipants = models.PositiveIntegerField()
