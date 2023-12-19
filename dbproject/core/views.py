@@ -16,7 +16,7 @@ lebanon_facts = [
     "Lebanon is a linguistic playground; Arabic is official, but French and English are widely spoken, reflecting its diverse heritage.",
     "The coastal city of Byblos, one of the oldest continuously inhabited cities, showcases Lebanon's deep connection to Phoenician history.",
     "Indulge in Lebanese sweets like baklava and ma'amoul, where every bite is a burst of honey, nuts, and exquisite flavors.",
-    "Have a sip on Lebanese coffee, a symbol of hospitality, served strong and often with a touch of cardamom.",
+    "A sip on Lebanese coffee, a symbol of hospitality, is served strong and often with a touch of cardamom.",
     "Lebanon's compact size allows you to ski in the morning in the mountain resorts and relax on the Mediterranean beaches in the afternoon.",
     "Visit the Cedar Forest, a UNESCO site, and stand among ancient cedar trees, some over a thousand years old, symbolizing Lebanon's endurance."
 ]
@@ -170,4 +170,4 @@ def check_email_availability(request):
             response_data = {"exists": True}
         else:
             response_data = {"exists": False}
-        return JsonResponse(response_data)
+    return JsonResponse(response_data)
