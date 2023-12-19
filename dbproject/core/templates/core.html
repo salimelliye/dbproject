@@ -18,9 +18,9 @@
     <!-- Navbar -->
     <nav class="bg-white p-4">
         <ul class="flex justify-evenly space-x-4">
-            <li><a id="toggleSidebarOn" href="" class="transition-all hover:text-purple-500">
+            <li><button id="toggleSidebarOn" href="" class="transition-all hover:text-purple-500">
                 <i class="fa-solid fa-bars text-3xl"></i>
-            </a></li>
+            </button></li>
             <li><a href="{% url 'home' %}" class="transition-all hover:text-purple-500 {% if request.path == '/home/' %}text-purple-500{% endif %}" title="Home">
                 <i class="fa-solid fa-house-user text-3xl"></i>
             </a></li>
@@ -39,7 +39,7 @@
         </ul>
     </nav>
     <!-- Content Section -->
-    <section class="bg-slate-100 h-full w-screen pb-4">
+    <section id="main-content" class="bg-slate-100 h-full w-screen pb-4">
         {%block home_content%}{%endblock%}
         {%block feed_content%}{%endblock%}
         {%block mytrips_content%}{%endblock%}
@@ -48,7 +48,7 @@
     </section>
 
     <!-- Sidebar -->
-    <div class="flex h-screen overflow-clip" id="sidebar">
+    <div class="hidden h-screen overflow-clip transition-transform ease-in-out duration-300" id="sidebar">
         <!-- Toggle button (for small screens) -->
         <div class="fixed z-20 inset-0 bg-black opacity-10">
         </div>
@@ -74,7 +74,7 @@
                             Friends List
                         </a>
                     </li>
-                    <li><a href="{% url 'userProfile' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                    <li><a href="{% url 'myTrips' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
                             Bookmarks
                         </a>
                     </li>
@@ -96,16 +96,18 @@
         const toggleButton = document.getElementById('toggleSidebar');
         const toggleButtonOn = document.getElementById('toggleSidebarOn');
         const sidebar = document.getElementById('sidebar');
-
+        const main = document.getElementById('main-content');
 
         toggleButton.addEventListener('click', () => {
-            sidebar.style.visibility = 'hidden';
+            sidebar.classList.toggle('flex');
             sidebar.classList.toggle('hidden');
+            main.classList.toggle('pl-60')
         });
 
         toggleButtonOn.addEventListener('click', () => {
-            sidebar.style.visibility = 'visible';
+            sidebar.classList.toggle('flex');
             sidebar.classList.toggle('hidden');
+            main.classList.toggle('pl-60')
         });
     </script>
 
