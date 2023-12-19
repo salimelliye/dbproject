@@ -77,11 +77,7 @@ def home(request, *args, **kwargs):
     return render(request, 'home.html', context)
 
 
-def create_trip(request, *args, **kwargs):
-    context = {
-        "tripForm": CreateTripForm
-    }
-    return render(request, 'createTrip.html', context)
+
 
 def create_branch(request, *args, **kwargs):
     context = {
@@ -215,4 +211,4 @@ def create_trip(request):
             return redirect('myTrips')
     else:
         form = CreateTripForm()
-    return render(request, 'myTrips.html', {'form': form})
+    return render(request, 'createTrip.html', {'form': form})
