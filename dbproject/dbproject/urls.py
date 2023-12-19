@@ -34,6 +34,7 @@ urlpatterns = [
 
     #Authentication
     path('signupuser/', views.save_person, name='signupuser'),
+    path('check-email-availability/', views.check_email_availability, name='check-email-availability'),
     
     # Add friends list url + template 
     # Add view for bookmarked trips
