@@ -5,7 +5,7 @@ from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth import login as auth_login
-
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -124,3 +124,13 @@ def save_person(request):
     context = {'form': form}
     return render(request, 'signupUser.html', context)
 
+
+def check_email_availability(request):
+    if request.method == "GET":
+        email = request.GET.get("email")
+        # Check if the email already exists in the database
+        if User.objects.filter(email=email).exists():
+            response_data = {"exists": True}
+        else:
+            response_data = {"exists": False}
+        return JsonResponse(response_data)
