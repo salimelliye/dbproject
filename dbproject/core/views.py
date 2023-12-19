@@ -106,9 +106,12 @@ def my_trips(request, *args, **kwargs):
     return render(request, 'myTrips.html', context)
 
 
-def trip_details(request, *args, **kwargs):
+def trip_details(request, trip_id):
+    trip = get_object_or_404(Trip, tripID=trip_id)
+    participants = trip.participants.all()
     context = {
-
+    'trip' : trip,
+    'participants' : participants
     }
     return render(request, 'tripDetails.html', context)
 
