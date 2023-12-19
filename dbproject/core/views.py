@@ -102,8 +102,10 @@ def trip_details(request, *args, **kwargs):
 
 
 def user_profile(request, *args, **kwargs):
+    logged_person = request.user.person
+    my_cars = Vehicle.objects.filter(userID=logged_person).order_by('-plateNb')
     context = {
-
+        "cars": my_cars,
     }
     return render(request, 'profile.html', context)
 
@@ -222,3 +224,23 @@ def create_trip(request):
  
     }
     return render(request, 'createTrip.html', context)
+
+def create_car(request):
+    if request.method == 'POST':
+        plateNb = request.POST.get('plateNb')
+        userID = request.user.person
+        make = request.POST.get('make')
+        model = request.POST.get('model')
+        color = request.POST.get('color')
+        nbSeats = request.POST.get('nbSeats')
+        vehicle = Vehicle.objects.create(
+            plateNb=plateNb,
+            userID = userID,
+            make = make,
+            model = model,
+            color = color,
+            nbSeats = nbSeats
+        )
+        return redirect('userProfile')
+    context = {}
+    return render(request, 'createCar.html', context)

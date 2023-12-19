@@ -32,7 +32,7 @@
             </div>
 
             <div class="mx-8">
-                <button class="bg-sec hover:bg-primary text-white font-medium rounded-lg px-4 py-2.5 absolute top-4 right-4 focus:outline-none focus:ring-4 focus:ring-primary-300">Add as a friend</button>
+                <button class="bg-sec text-white font-medium rounded-lg px-4 py-2.5 absolute top-4 right-4 focus:outline-none focus:ring-4 focus:ring-primary-300">Add as a friend</button>
                 <h2 class="text-xl font-bold mb-2 mt-6">Friends</h2>
                 <div class="space-y-4">
                     <!-- Card 1 -->
@@ -65,9 +65,19 @@
 
                 <h2 class="text-xl font-bold mb-2 mt-6">Owned Vehicles</h2>
                 <ul class="list-none pl-0">
-                    <li>Car 1 - ABC123</li>
-                    <li>Car 2 - XYZ789</li>
+                    {% if cars %}
+                        {% for car in cars %}
+                            <li>
+                                <i class="fa-solid fa-car-side"></i> 
+                                {{ car.make }} {{car.model}} - {{car.nbSeats}} Seats
+                                
+                            </li>
+                        {% endfor %}
+                    {%else%}
+                        <p>No cars yet.</p>
+                    {%endif%}
                 </ul>
+                <button class="bg-sec text-white font-medium rounded-lg px-4 py-2.5 top-4 right-4 focus:outline-none focus:ring-4 focus:ring-primary-300 mt-4"><a href="{% url 'createCar' %}">Add a Car</a></button>
             </div>
         </div>
     </div>

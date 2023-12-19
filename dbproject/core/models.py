@@ -63,7 +63,7 @@ class Trip(models.Model):
 
 
 class Vehicle(models.Model):
-    plateNb = models.AutoField( blank=True, primary_key=True)
+    plateNb = models.CharField(max_length=500, blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)
     model = models.CharField(max_length=255)
     make = models.CharField(max_length=255)

@@ -32,6 +32,7 @@ urlpatterns = [
     path('tripDetails/', views.trip_details, name="tripDetails"),
     path('profile/', views.user_profile, name='userProfile'),
     path('feed/', views.feed, name='feed'),
+    path('createCar/', views.create_car, name='createCar'),
 
     #Authentication
     path('signupuser/', views.save_person, name='signupuser'),
