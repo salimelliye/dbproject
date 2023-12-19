@@ -47,6 +47,7 @@ class Trip(models.Model):
     rideDate = models.DateTimeField() # removed startTime = models.DateTimeField() to avoid repetition
     nbParticipants = models.PositiveIntegerField()
     departure = models.CharField(max_length=255)
+    isCompleted = models.BooleanField(default=False)
     isFeatured = models.BooleanField(default=False)
     isBookmarked = models.BooleanField(default=False)
     participants = models.ManyToManyField('Person', default='', null=True, blank=True, related_name='participants')
