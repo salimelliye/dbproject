@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Add Tailwind CSS CDN link -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href='{% static "dist/output.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
+</head>
+<body class="h-full">
+
+    <!-- Navbar -->
+    <nav class="bg-white p-4">
+        <ul class="flex justify-evenly space-x-4">
+            <li><button id="toggleSidebarOn" href="" class="transition-all hover:color-sec">
+                <i class="fa-solid fa-bars text-3xl"></i>
+            </button></li>
+            <li><a href="{% url 'home' %}" class="transition-all hover:text-purple-500 {% if request.path == '/home/' %}color-sec{% endif %}" title="Home">
+                <i class="fa-solid fa-house-user text-3xl"></i>
+            </a></li>
+            <li><a href="{% url 'feed' %}" class="transition-all hover:text-purple-500 {% if request.path == '/feed/' %}color-sec{% endif %}" title="Feed">
+                <i class="fa-solid fa-star-of-life text-3xl"></i>
+            </a></li>
+            <li><a href="{% url 'createTrip' %}" class="transition-all hover:text-purple-500 {% if request.path == '/createTrip/' %}color-sec{% endif %}" title="New Trip">
+                <i class="fa-solid fa-car-on text-3xl"></i>
+            </a></li>
+            <li><a href="{% url 'myTrips' %}" class="transition-all hover:text-purple-500 {% if request.path == '/myTrips/' %}color-sec{% endif %}" title="My Trips">
+                <i class="fa-solid fa-book-atlas text-3xl"></i>
+            </a></li>
+            <li><a href="{% url 'userProfile' %}" class="transition-all hover:text-purple-500 {% if request.path == '/userProfile/' %}color-sec{% endif %}" title="Profile">
+                <i class="fa-solid fa-user text-3xl"></i>
+            </a></li>
+        </ul>
+    </nav>
+    <!-- Content Section -->
+    <section id="main-content" class="bg-slate-100 h-screen w-screen pb-4">
+        {%block home_content%}{%endblock%}
+        {%block feed_content%}{%endblock%}
+        {%block mytrips_content%}{%endblock%}
+        {%block createtrip_content%}{%endblock%}
+        {%block profile_content%}{%endblock%}
+    </section>
+
+    <!-- Sidebar -->
+    <div class="hidden h-screen overflow-clip transition-transform ease-in-out duration-300" id="sidebar">
+        <!-- Toggle button (for small screens) -->
+        <div class="fixed z-20 inset-0 bg-black opacity-10">
+        </div>
+        <div class="fixed z-30 inset-y-0 left-0 w-64 bg-gray-800 overflow-x-hidden transition-transform transform ease-in-out duration-300">
+            <!-- Sidebar Content -->
+            <div class="flex items-center justify-between p-4">
+                <div class="text-2xl font-semibold text-white">Kazdura</div>
+                <button id="toggleSidebar" class="text-gray-400 focus:outline-none">x
+                </button>
+            </div>
+            <!-- User Profile -->
+            <div class="p-4">
+                <div class="w-16 h-16 bg-gray-300 rounded-full"></div>
+            </div>
+            <!-- Sidebar Navigation -->
+            <nav class="mt-2 ml-4">
+                <ul class="space-y-2">
+                    <li><a href="{% url 'userProfile' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Account
+                        </a>
+                    </li>
+                    <li><a href="{% url 'userProfile' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Friends List
+                        </a>
+                    </li>
+                    <li><a href="{% url 'myTrips' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Bookmarks
+                        </a>
+                    </li>
+                    <li><a href="{% url 'myTrips' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Trips
+                        </a>
+                    </li>
+                    <li><a href="{% url 'userProfile' %}" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            Vehicles
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Add JavaScript for Sidebar Toggle -->
+    <script>
+        const toggleButton = document.getElementById('toggleSidebar');
+        const toggleButtonOn = document.getElementById('toggleSidebarOn');
+        const sidebar = document.getElementById('sidebar');
+        const main = document.getElementById('main-content');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('flex');
+            sidebar.classList.toggle('hidden');
+            main.classList.toggle('pl-60')
+        });
+
+        toggleButtonOn.addEventListener('click', () => {
+            sidebar.classList.toggle('flex');
+            sidebar.classList.toggle('hidden');
+            main.classList.toggle('pl-60')
+        });
+    </script>
+
+</body>
+</html>

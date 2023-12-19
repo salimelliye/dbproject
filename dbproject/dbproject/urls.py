@@ -24,7 +24,7 @@ urlpatterns = [
     path('', views.landing , name='landing'),
     path('signupUser/', views.sign_up_user, name='signupUser'),
     path('signupOrg/', views.sign_up_org, name='signupOrg'),
-    path('login/', views.login, name='login'),
+    path('login/', views.user_login, name='login'),
     path('home/', views.home, name='home'),
     path('createTrip/', views.create_trip, name='createTrip'),
     path('myTrips/', views.my_trips, name='myTrips'),
@@ -34,6 +34,10 @@ urlpatterns = [
 
     #Authentication
     path('signupuser/', views.save_person, name='signupuser'),
-
+    path('check-email-availability/', views.check_email_availability, name='check-email-availability'),
+    
+    # Add friends list url + template 
+    # Add view for bookmarked trips
+    # Add view for vehicles
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

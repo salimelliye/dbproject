@@ -1,137 +1,59 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tryp - Home</title>
-    <!-- Add Tailwind CSS CDN link -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href='{% static "dist/output.css" %}'>
-    <link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
-</head>
-<body class="font-sans">
-
-    <!-- Navbar -->
-    <nav class="bg-primary p-4">
-        <ul class="flex justify-evenly space-x-4">
-            <li><a id="toggleSidebarOn" href="" class="text-white transition-all hover:text-gray-300">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </a></li>
-            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="Home">
-                <i class="fa-solid fa-house-user text-2xl"></i>
-            </a></li>
-            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="Feed">
-                <i class="fa-solid fa-star-of-life text-2xl"></i>
-            </a></li>
-            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="New Tryp">
-                <i class="fa-solid fa-car-on text-2xl"></i>
-            </a></li>
-            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="My Tryps">
-                <i class="fa-solid fa-book-atlas text-2xl"></i>
-            </a></li>
-            <li><a href="#" class="text-white transition-all hover:text-gray-300" title="Profile">
-                <i class="fa-solid fa-user text-2xl"></i>
-            </a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Section -->
-    <div class="grid grid-rows-3 grid-cols-3 gap-4 items-center justify-center mx-20 my-10 h-screen">
-        <!-- Welcome User -->
-        <div class="bg-pink flex justify-center items-center p-4 row-start-1 col-start-1 col-span-full h-full text-center rounded-2xl">
-            Welcome, [insert Django username here]
+{% extends 'core.html' %}
+{% block title %}Home{%endblock%}
+{% block home_content%}
+<!-- Main Section -->
+<div class="grid grid-rows-3 grid-cols-3 gap-6 items-center justify-center mx-20">
+    <!-- Welcome User -->
+    <div class=" flex flex-col justify-center items-center p-4 row-start-1 col-start-1 col-span-full gap-4 h-full text-center rounded-2xl">
+        <span class="font-extrabold text-6xl color-sec anim-typewriter">
+        {% if user %}Hey {{ request.user.first_name }}, did you know that 
+        {% else %} Welcome! {% endif %}
+        </span>
+        {{fun_fact}}
+        <a href="{% url 'feed' %}"><span class="color-sec hover:underline">Discover Lebanon</span></a>
+    </div>
+    <!-- Trips Modules -->
+    <div class="bg-purple-400 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
+        <div class="p-4 flex flex-col items-start">
+            <h2 class="text-2xl font-bold mb-2">Trip 1</h2>
+            <p class="text-gray-700 mb-2">Date: February 1, 2023</p>
+            <p class="text-gray-700 mb-2">Location: Beach, Country</p>
+            <a href="#" class="hover:underline">View Details</a>
         </div>
-        <!-- Tryps Modules -->
-        <div class="bg-green-300 flex justify-center items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
-            <!-- Your trip content here -->
-            Trip 1
+        <img class="w-32 h-32 rounded-full object-cover object-center" src="https://via.placeholder.com/300" alt="Trip Image">
+    </div>
+    
+    <div class="bg-purple-400 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl ">
+        <div class="p-4 flex flex-col items-start">
+            <h2 class="text-2xl font-bold mb-2">Trip 2</h2>
+            <p class="text-gray-700 mb-2">Date: February 1, 2023</p>
+            <p class="text-gray-700 mb-2">Location: Beach, Country</p>
+            <a href="#" class="hover:underline">View Details</a>
         </div>
-        <div class="bg-yellow-300 flex justify-center items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
-            <!-- Your trip content here -->
-            Trip 2
+        <img class="w-32 h-32 rounded-full object-cover object-center" src="https://via.placeholder.com/300" alt="Trip Image">
+    </div>
+    
+    <div class="bg-purple-400 flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
+        <div class="p-4 flex flex-col items-start">
+            <h2 class="text-2xl font-bold mb-2">Upcoming: Trip 3</h2>
+            <p class="text-gray-700 mb-2">Date: February 1, 2023</p>
+            <p class="text-gray-700 mb-2">Location: Beach, Country</p>
+            <a href="#" class="hover:underline">View Details</a>
         </div>
-        <div class="bg-blue-300 flex justify-center items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
-            <!-- Your trip content here -->
-            Trip 3
-        </div>
-
-        <!-- Calendar -->
-        <div class="bg-gray-400 flex justify-center items-center p-4 row-start-3 col-start-1 row-span-2 col-span-2 h-full rounded-2xl">
-            <!-- Calendar content here -->
-            Calendar
-        </div>
-
-        <!-- Ad Box -->
-        <div class="bg-red-500 flex justify-center items-center p-4 row-start-3 row-span-2 col-start-3 h-full text-center rounded-2xl">
-            <!-- Ad content here -->
-            Ad
-        </div>
+        <img class="w-32 h-32 rounded-full object-cover object-center" src="https://via.placeholder.com/300" alt="Trip Image">
+    </div>
+    
+    <!-- Calendar -->
+    <div class="bg-gray-400 flex justify-center items-center p-4 row-start-3 col-start-1 row-span-2 col-span-2 h-full rounded-2xl">
+        <!-- Calendar content here -->
+        Calendar
     </div>
 
-    <!-- Sidebar -->
-    <div class="flex h-screen" id="sidebar">
-        <!-- Toggle button (for small screens) -->
-        <div class="fixed z-20 inset-0 bg-black opacity-0">
-        </div>
-        <div class="fixed z-30 inset-y-0 left-0 w-64 bg-gray-800 overflow-x-hidden transition-transform transform ease-in-out duration-300">
-            <!-- Sidebar Content -->
-            <div class="flex items-center justify-between p-4">
-                <div class="text-2xl font-semibold text-white">Tryp</div>
-                <button id="toggleSidebar" class="text-gray-400 focus:outline-none">x
-                </button>
-            </div>
-            <!-- User Profile -->
-            <div class="p-4">
-                <div class="w-16 h-16 bg-gray-300 rounded-full"></div>
-            </div>
-            <!-- Sidebar Navigation -->
-            <nav class="mt-2 ml-4">
-                <ul class="space-y-2">
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
-                            Account
-                        </a>
-                    </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
-                            Friends List
-                        </a>
-                    </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
-                            Bookmarks
-                        </a>
-                    </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
-                            Trips
-                        </a>
-                    </li>
-                    <li><a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded-md">
-                            Vehicles
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+    <!-- Ad Box -->
+    <div class="bg-red-500 flex justify-center items-center p-4 row-start-3 row-span-2 col-start-3 h-full text-center rounded-2xl">
+        <!-- Ad content here -->
+        Ad
     </div>
+</div>
 
-    <!-- Add JavaScript for Sidebar Toggle -->
-    <script>
-        const toggleButton = document.getElementById('toggleSidebar');
-        const toggleButtonOn = document.getElementById('toggleSidebarOn');
-        const sidebar = document.getElementById('sidebar');
-
-
-        toggleButton.addEventListener('click', () => {
-            sidebar.style.visibility = 'hidden';
-        });
-
-        toggleButtonOn.addEventListener('click', () => {
-            sidebar.style.visibility = 'visible';
-        });
-    </script>
-
-
-</body>
-</html>
+{%endblock%}
