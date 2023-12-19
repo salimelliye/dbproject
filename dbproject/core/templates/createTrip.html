@@ -40,7 +40,7 @@
                     </div>
                     <div>
                         <label for="participants" class="block mt-2 mb-2 text-sm font-medium color-primary">Participants</label>
-                        <select multiple  name="participant_ids" id="participants"  class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                        <select multiple  name="participant_ids" id="participants"  class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" >
                             {% for friend in my_friends %}
                             <option value="{{friend.personID}}">{{friend.friendID.user.first_name}} {{friend.personID}} {{friend.friendID.user.last_name}} {{friend.person.personID}}</option>
                             {% endfor %}
