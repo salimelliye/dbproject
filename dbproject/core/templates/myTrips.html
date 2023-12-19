@@ -7,7 +7,7 @@
             My Trips
         </h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
+            {% if my_trips %}
             {% for trip in my_trips %}
             <div class="bg-white rounded-lg overflow-hidden shadow-md">
                 {% if trip.image %}
@@ -24,6 +24,11 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div>
+                No Trips yet. <a href="{% url 'createTrip' %}" class="font-bold color-sec hover:underline">Create a Trip</a>
+            </div>
+            {%endif%}
 
         </div>
     </div>
