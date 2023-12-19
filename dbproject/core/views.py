@@ -208,12 +208,10 @@ def create_trip(request):
             for participant_id in participant_ids:
                 participant = Person.objects.get(pk=participant_id)
                 trip.participants.add(participant)
-    
     context={
 
         'my_cars' : my_cars,
         'my_friends' : my_friends
  
     }
-
     return render(request, 'createTrip.html', context)
