@@ -18,28 +18,28 @@
     <!-- Navbar -->
     <nav class="bg-white p-4">
         <ul class="flex justify-evenly space-x-4">
-            <li><button id="toggleSidebarOn" href="" class="transition-all hover:text-purple-500">
+            <li><button id="toggleSidebarOn" href="" class="transition-all hover:color-sec">
                 <i class="fa-solid fa-bars text-3xl"></i>
             </button></li>
-            <li><a href="{% url 'home' %}" class="transition-all hover:text-purple-500 {% if request.path == '/home/' %}text-purple-500{% endif %}" title="Home">
+            <li><a href="{% url 'home' %}" class="transition-all hover:text-purple-500 {% if request.path == '/home/' %}color-sec{% endif %}" title="Home">
                 <i class="fa-solid fa-house-user text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'feed' %}" class="transition-all hover:text-purple-500 {% if request.path == '/feed/' %}text-purple-500{% endif %}" title="Feed">
+            <li><a href="{% url 'feed' %}" class="transition-all hover:text-purple-500 {% if request.path == '/feed/' %}color-sec{% endif %}" title="Feed">
                 <i class="fa-solid fa-star-of-life text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'createTrip' %}" class="transition-all hover:text-purple-500 {% if request.path == '/createTrip/' %}text-purple-500{% endif %}" title="New Trip">
+            <li><a href="{% url 'createTrip' %}" class="transition-all hover:text-purple-500 {% if request.path == '/createTrip/' %}color-sec{% endif %}" title="New Trip">
                 <i class="fa-solid fa-car-on text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'myTrips' %}" class="transition-all hover:text-purple-500 {% if request.path == '/myTrips/' %}text-purple-500{% endif %}" title="My Trips">
+            <li><a href="{% url 'myTrips' %}" class="transition-all hover:text-purple-500 {% if request.path == '/myTrips/' %}color-sec{% endif %}" title="My Trips">
                 <i class="fa-solid fa-book-atlas text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'userProfile' %}" class="transition-all hover:text-purple-500 {% if request.path == '/userProfile/' %}text-purple-500{% endif %}" title="Profile">
+            <li><a href="{% url 'userProfile' %}" class="transition-all hover:text-purple-500 {% if request.path == '/userProfile/' %}color-sec{% endif %}" title="Profile">
                 <i class="fa-solid fa-user text-3xl"></i>
             </a></li>
         </ul>
     </nav>
     <!-- Content Section -->
-    <section id="main-content" class="bg-slate-100 h-full w-screen pb-4">
+    <section id="main-content" class="bg-slate-100 h-screen w-screen pb-4">
         {%block home_content%}{%endblock%}
         {%block feed_content%}{%endblock%}
         {%block mytrips_content%}{%endblock%}
