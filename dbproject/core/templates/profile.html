@@ -1,18 +1,7 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>User Profile</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href='{% static "dist/output.css" %}'>
-    <link rel="stylesheet" type="text/css" href='{% static "dist/styles.css" %}'>
-</head>
-<body class="bg-slate-200">
+{% extends 'core.html' %}
+{% block title %}User Profile{%endblock%}
+{% block profile_content%}
+<body class="bg-slate-100">
     <div class="h-screen flex flex-col items-center justify-center">
         <div class="w-full max-w-7xl h-3/4 bg-light rounded-lg shadow p-5 grid grid-cols-1 md:grid-cols-2 gap-8 mx-4 relative">
             <div class="mt-6">
@@ -82,4 +71,4 @@
         </div>
     </div>
 </body>
-</html>
+{%endblock%}
