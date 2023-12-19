@@ -9,6 +9,7 @@
                     Create a Trip
                 </h1>
                 <form class="grid grid-cols-2 gap-4" action="#" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div>
                         <label for="tripName" class="block mt-2 mb-2 text-sm font-medium color-primary">Trip Name</label>
                         <input type="text" name="tripName" id="tripName" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Trip Name" required="">
@@ -38,7 +39,9 @@
                         <input type="text" name="participants" id="participants" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Enter Participants" required="">
                     </div>
                     <div>
-                        <label for="car" class="block mt-2 mb-2 text-sm font-medium color-primary">Choose a Car</label>
+                        <label for="car" class="flex justify-between mt-2 mb-2 text-sm font-medium color-primary">Choose a Car
+                            <a href="{% url 'userProfile'%}" class="color-sec no-underline"> No car yet? Start by adding a Car!</a>
+                        </label>
                         <select name="car" id="car" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
                             <option value="car1">Car 1</option>
                             <option value="car2">Car 2</option>

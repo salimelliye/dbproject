@@ -14,7 +14,7 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['first_name', 'username', 'last_name','username','email','password1','password2']
 
-class CreateRideForm(forms.Form):
+class CreateTripForm(forms.Form):
     tripName = forms.CharField(
         label='Trip Name',
         widget=forms.TextInput(attrs={'placeholder': 'Enter Trip Name'}),

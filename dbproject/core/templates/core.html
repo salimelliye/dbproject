@@ -33,7 +33,7 @@
             <li><a href="{% url 'myTrips' %}" class="transition-all hover:text-purple-500 {% if request.path == '/myTrips/' %}color-sec{% endif %}" title="My Trips">
                 <i class="fa-solid fa-book-atlas text-3xl"></i>
             </a></li>
-            <li><a href="{% url 'userProfile' %}" class="transition-all hover:text-purple-500 {% if request.path == '/userProfile/' %}color-sec{% endif %}" title="Profile">
+            <li><a href="{% url 'userProfile' %}" class="transition-all hover:text-purple-500 {% if request.path == '/profile/' %}color-sec{% endif %}" title="Profile">
                 <i class="fa-solid fa-user text-3xl"></i>
             </a></li>
         </ul>
@@ -46,6 +46,7 @@
         {%block createtrip_content%}{%endblock%}
         {%block profile_content%}{%endblock%}
         {%block createbranch_content%}{%endblock%}
+        {%block tripdetails_content%}{%endblock%}
 
     </section>
 

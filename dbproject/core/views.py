@@ -79,7 +79,7 @@ def home(request, *args, **kwargs):
 
 def create_trip(request, *args, **kwargs):
     context = {
-
+        "tripForm": CreateTripForm
     }
     return render(request, 'createTrip.html', context)
 
@@ -177,3 +177,42 @@ def check_email_availability(request):
         else:
             response_data = {"exists": False}
     return JsonResponse(response_data)
+
+def create_trip(request):
+    if request.method == 'POST':
+        form = CreateTripForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            # Extract data from the form
+            trip_name = form.cleaned_data['tripName']
+            date = form.cleaned_data['date']
+            time = form.cleaned_data['time']
+            images = form.cleaned_data['images']
+            description = form.cleaned_data['description']
+            location = form.cleaned_data['location']
+            participants = form.cleaned_data['participants']
+            car = form.cleaned_data['car']
+
+            # Assuming you have the current user ID, you can get it from the request
+            user_id = request.user.id
+
+            # Save data to the Trip model
+            trip = Trip.objects.create(
+                userID=user_id,
+                tripName=trip_name,
+                rideDate=datetime.combine(date, time),
+                description=description,
+                location=location,
+                nbParticipants=participants,
+                plateNb=car,
+            )
+
+            # Save images if provided
+            if images:
+                for image in images:
+                    trip.images.create(image=image)
+
+            return redirect('myTrips')
+    else:
+        form = CreateTripForm()
+    return render(request, 'myTrips.html', {'form': form})
