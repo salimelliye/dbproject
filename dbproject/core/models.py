@@ -40,6 +40,7 @@ class Friend(models.Model):
 
 class Trip(models.Model):
     id_prefix = "T"
+    image = models.ImageField(blank=True, null=True)
     name = models.CharField(max_length=200, null=True)
     tripID = models.CharField(max_length=500, blank=True, primary_key=True)
     userID = models.ForeignKey(Person, on_delete=models.CASCADE)

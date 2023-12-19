@@ -88,7 +88,9 @@ def create_branch(request, *args, **kwargs):
     return render(request, 'createBranch.html', context)
 
 def my_trips(request, *args, **kwargs):
+    my_trips = Trip.objects.filter(userID = request.user.person).order_by('-rideDate')
     context = {
+        'my_trips' : my_trips
 
     }
     return render(request, 'myTrips.html', context)
@@ -194,6 +196,8 @@ def create_trip(request):
         plateNb = request.POST.get('plate_number')  
         ride_date = request.POST.get('ride_date') 
         departure = request.POST.get('departure')
+        name = request.POST.get('name')
+        trip_image = request.FILES.get('image')
         ride_date = datetime.strptime(ride_date, '%Y-%m-%dT%H:%M')
         vehicle = get_object_or_404(Vehicle, plateNb=plateNb)
         organization = get_object_or_404(Organization, orgID=orgID)
@@ -207,7 +211,9 @@ def create_trip(request):
                 isFeatured=False,
                 isBookmarked=False,
                 description = description,
-                nbParticipants = vehicle.nbSeats
+                nbParticipants = vehicle.nbSeats,
+                name = name,
+                image = trip_image,
             )
         participant_ids = request.POST.getlist('participant_ids')  
         if participant_ids:
