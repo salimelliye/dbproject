@@ -37,6 +37,10 @@ body{
     color:#7f3af3;
 }
 
+.border-sec{
+    border: 2px#7f3af3 solid;
+}
+
 .color-pink{
     color:#ff5ccb;
 }
