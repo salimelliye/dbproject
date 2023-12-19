@@ -23,6 +23,13 @@ lebanon_facts = [
     "Visit the Cedar Forest, a UNESCO site, and stand among ancient cedar trees, some over a thousand years old, symbolizing Lebanon's endurance."
 ]
 
+img_placeholders = [
+    "https://www.shutterstock.com/shutterstock/videos/1016011132/thumb/1.jpg?ip=x480",
+    "https://ak.picdn.net/shutterstock/videos/1016011156/thumb/1.jpg",
+    "https://www.shutterstock.com/shutterstock/videos/1016011162/thumb/1.jpg?ip=x480",
+    "https://www.shutterstock.com/shutterstock/videos/1016011150/thumb/1.jpg?ip=x480"
+]
+
 
 def landing(request, *args, **kwargs):
     context = {
@@ -73,8 +80,11 @@ def user_login(request):
 
 
 def home(request, *args, **kwargs):
+    my_trips = Trip.objects.filter(userID = request.user.person).order_by('-rideDate')
     context = {
-        "fun_fact": random.choice(lebanon_facts)
+        "fun_fact": random.choice(lebanon_facts),
+        'my_trips' : my_trips,
+        'img_placeholder': random.choice(img_placeholders)
     }
     return render(request, 'home.html', context)
 
