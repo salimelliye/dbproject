@@ -14,15 +14,20 @@
 	
 	<body>
 		<section id="homeSection" class="grid grid-cols-2 gap-4 items-center justify-center">
-			<div class="flex flex-col justify-center h-screen ml-10">
-				<h1 class="text-7xl color-primary font-extrabold"> Where are you going today? </h1>
-				<div class="mt-10">
-					<input placeholder="Enter something like Beirut..." class="border border-solid border-pink-400 rounded-xl w-2/3 placeholder-transparent pl-4">
-					<button class="bg-light rounded pr-3 pt-1 pb-1 ml-2 hover:shadow-2xl bg-pink"><i class="fa-solid fa-magnifying-glass ml-3 color-light"></i></button>
+			<div class="flex flex-col justify-start h-screen ml-10">
+				<div class="flex flex-row mt-4 mb-40">
+					<button type="submit" class="bg-sec text-white px-4 py-2 rounded mx-4 mt-2"><a href="login/">Login</a></button>
+					<button type="submit" class="bg-sec text-white px-4 py-2 rounded mx-4 mt-2"><a href="signupUser/">SignUp</a></button>
 				</div>
-				<div class="flex flex-row mt-4">
-					<button type="submit" class="bg-pink text-white px-4 py-2 rounded mx-4 mt-2"><a href="login/">Login</a></button>
-					<button type="submit" class="bg-pink text-white px-4 py-2 rounded mx-4 mt-2"><a href="signupUser/">SignUp</a></button>
+				<h1 class="text-7xl font-extrabold h-64 max-w-2xl">
+					Kazdura, your Social Media for 
+					<a href="" class="typewrite" data-period="2000" data-type='["Discovering Lebanon", "Hanging out with Friends", "Living Life Fully", "Finding that Fancy Dating Restaurant" ]'>
+					  <span class="wrap text-colorSec"></span>
+					</a>
+				</h1>
+				<div class="mt-20">
+					<input placeholder="Enter something like Beirut..." class="border border-solid h-10 border-purple-500 rounded-xl w-2/3 placeholder-transparent pl-4" />
+					<button class="bg-light rounded pr-3 pt-1 pb-1 ml-2 hover:shadow-2xl bg-pink"><i class="fa-solid fa-magnifying-glass ml-3 color-light"></i></button>
 				</div>
 			</div>
 
