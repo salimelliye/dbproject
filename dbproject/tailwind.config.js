@@ -41,9 +41,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        customDarkGreen: '#006e58',
-        customLightGreen: '#8FB9B2',
-        colorSec: '#7f3af3',
       },
     }
   },
