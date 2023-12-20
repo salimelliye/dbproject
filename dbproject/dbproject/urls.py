@@ -33,6 +33,8 @@ urlpatterns = [
     path('profile/', views.user_profile, name='userProfile'),
     path('feed/', views.feed, name='feed'),
     path('createCar/', views.create_car, name='createCar'),
+    path('mark_trip_completed/<str:trip_id>/', views.mark_trip_completed, name='mark_trip_completed'),
+
 
     #Authentication
     path('signupuser/', views.save_person, name='signupuser'),

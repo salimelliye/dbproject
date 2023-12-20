@@ -18,11 +18,37 @@
     <div class="border-sec flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
         <div class="p-4 flex flex-col items-start">
             <div class="flex justify-around items-center align-middle w-full mb-2">
-                <h2 class="text-2xl font-bold">{{trip.name}}</h2>
+                <h2 class="text-2xl font-bold">{{trip.name}} {{ trip.tripID }}</h2>
                 <button class="bookmark-f"><i class="fa-regular fa-bookmark"></i></button>
                 <button class="bookmark-t hidden"><i class="fa-solid fa-bookmark"></i></button>
-                <button class="complete-f "><i class="fa-regular fa-circle-check"></i></button>
+                <button class="complete-f " data-trip-id="{{ trip.tripID }}"><i class="fa-regular fa-circle-check"></i></button>
                 <button class="complete-t hidden"><i class="fa-solid fa-circle-check"></i></button>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                $(document).ready(function() {
+                    $('.complete-f').on('click', function() {
+                        var tripId = $(this).data('trip-id');
+
+                        $.ajax({
+                            url: '/mark_trip_completed/' + tripId + '/',
+                            method: 'POST', 
+                            data: {
+                                csrfmiddlewaretoken: '{{ csrf_token }}' 
+                               
+                            },
+                            success: function(response) {
+                              
+                                console.log('Trip marked as completed');
+                            },
+                            error: function(xhr, errmsg, err) {
+                       
+                                console.log('Error marking trip as completed');
+                            }
+                        });
+                    });
+                });
+                </script>
+
             </div>
             <p class="text-gray-700 mb-2">Date: {{trip.rideDate}}</p>
             <p class="text-gray-700 mb-2">Departure: {{trip.departure}}</p>
