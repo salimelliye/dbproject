@@ -74,6 +74,7 @@ class Vehicle(models.Model):
 
 class Organization(models.Model):
     id_prefix="O"
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     orgID = models.CharField(max_length=10, unique=True, primary_key=True, blank=True)
     orgName = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='org_logos/', blank=True)

@@ -215,6 +215,12 @@ def save_org(request):
         if form.is_valid():
             email = form.cleaned_data.get('email').lower() 
             password = form.cleaned_data.get('password2')
+            user = User.objects.create_user(
+                username=email,
+                email=email,
+                password=password,
+            )
+            user.save()
             org = User.objects.create_user(
                 username=email,
                 email=email,
