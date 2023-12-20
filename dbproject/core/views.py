@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 lebanon_facts = [
     "Lebanon introduced the world to mezze, a delightful array of small dishes like hummus, tabbouleh, and falafel. Perfect for sharing.",
@@ -114,6 +115,21 @@ def trip_details(request, trip_id):
     'participants' : participants
     }
     return render(request, 'tripDetails.html', context)
+
+@csrf_exempt
+def mark_trip_completed(request, trip_id):
+    if request.method == 'POST':
+        try:
+            trip = get_object_or_404(Trip, tripID=trip_id)
+            trip.isCompleted = True
+            trip.save()
+            return JsonResponse({'message': 'Trip marked as completed'})
+        except Trip.DoesNotExist:
+            return JsonResponse({'error': 'Trip not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
 def user_profile(request, *args, **kwargs):
