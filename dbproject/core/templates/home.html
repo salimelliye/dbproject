@@ -17,7 +17,13 @@
     {% for trip in my_trips|slice:":3"%}
     <div class="border-sec flex justify-evenly items-center p-4 row-span-1 col-span-1 h-full text-center rounded-2xl">
         <div class="p-4 flex flex-col items-start">
-            <h2 class="text-2xl font-bold mb-2">{{trip.name}}</h2>
+            <div class="flex justify-around items-center align-middle w-full mb-2">
+                <h2 class="text-2xl font-bold">{{trip.name}}</h2>
+                <i id="bookmark-f" class="fa-regular fa-bookmark"></i>
+                <i id="bookmark-t" class="fa-solid fa-bookmark hidden"></i>
+                <i id="complete-f" class="fa-regular fa-circle-check"></i>
+                <i id="complete-t" class="fa-solid fa-circle-check hidden"></i>
+            </div>
             <p class="text-gray-700 mb-2">Date: {{trip.rideDate}}</p>
             <p class="text-gray-700 mb-2">Departure: {{trip.departure}}</p>
             <a href="{% url 'tripDetails' trip.tripID%}" class="hover:underline">View Details</a>
@@ -48,5 +54,14 @@
         Ad
     </div>
 </div>
+
+<script>
+    const bookmarkTrue = document.getElementById("bookmark-t");
+    const bookmarkFalse = document.getElementById("bookmark-f");
+    const completeTrue = document.getElementById("complete-t");
+    const completeFalse = document.getElementById("complete-f");
+
+    
+</script>
 
 {%endblock%}

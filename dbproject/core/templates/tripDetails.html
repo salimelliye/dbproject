@@ -20,13 +20,15 @@
             </div>
         </div>
         <div class="mx-8">
+            {% if trip.userID != request.user.person %}
             <button class="bg-sec hover:bg-primary text-white font-medium rounded-lg px-4 py-2.5 absolute top-4 right-4 focus:outline-none focus:ring-4 focus:ring-primary-300">
                 <a href="{% url 'myTrips'%}">Add to My Trips</a>
             </button>
+            {% endif %}
             <h2 class="text-xl font-bold mb-2">Organizer</h2>
             <div class="flex items-center space-x-2">
                 <img class="w-12 h-12 object-cover rounded-full" src="https://via.placeholder.com/50" alt="Organizer">
-                <p class="text-gray-700 mb-2"><a href="#">John Doe</a></p>
+                <p class="text-gray-700 mb-2"><a href="#">{{trip.userID.user.first_name}} {{trip.userID.user.last_name}}</a></p>
             </div>
 
             <h2 class="text-xl font-bold mb-2 mt-6">Participants</h2>
