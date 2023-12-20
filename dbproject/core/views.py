@@ -82,10 +82,13 @@ def user_login(request):
 
 def home(request, *args, **kwargs):
     my_trips = Trip.objects.filter(userID = request.user.person).order_by('-rideDate')
+    allTrue = my_trips.filter(isCompleted = True).count() == my_trips.count()
+
     context = {
         "fun_fact": random.choice(lebanon_facts),
         'my_trips' : my_trips,
-        'img_placeholder': random.choice(img_placeholders)
+        'img_placeholder': random.choice(img_placeholders),
+        'allTrue' : allTrue
     }
     return render(request, 'home.html', context)
 
