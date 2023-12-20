@@ -148,7 +148,12 @@ def user_profile(request, *args, **kwargs):
 
 
 def feed(request, *args, **kwargs):
+    logged_in_user = request.user 
+    user_friends = logged_in_user.friends.all()
+    featured_trips_of_friends = Trip.objects.filter(userID__in=user_friends, isFeatured=True)
     context = {
+
+        'featured_trips_of_friends' : featured_trips_of_friends,
 
     }
     return render(request, 'feed.html', context)

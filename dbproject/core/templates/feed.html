@@ -9,24 +9,26 @@
 
         <div class="grid grid-rows-1 md:grid-rows-2 lg:grid-rows-3 gap-6">
             <div class="bg-white rounded-lg overflow-hidden shadow-md w-full">
+
+                {% for  featured in featured_trips_of_friends %}
                 <div class="p-4">
                     <div class="flex justify-between items-center mb-4">
                         <div class="flex items-center">
                             <img class="w-12 h-12 object-cover rounded-full mr-4" src="https://via.placeholder.com/50" alt="Organizer">
                             <div>
-                                <h2 class="text-lg font-semibold">Organizer Name</h2>
+                                <h2 class="text-lg font-semibold">{{trip.userID.user.first_name}} {{trip.userID.user.last_name}}</h2>
                                 <p class="text-gray-500">Trip Organizer</p>
                             </div>
                         </div>
                         <button class="bg-pink text-white px-4 py-2 rounded">Add to My Trips</button>
                     </div>
-                    <h2 class="text-xl font-bold mb-2">Trip 1</h2>
-                    <p class="text-gray-700 mb-2">Date: January 1, 2023</p>
-                    <p class="text-gray-700 mb-2">Location: City, Country</p>
-                    <p class="text-gray-700 mb-4">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <h2 class="text-xl font-bold mb-2">{{trip.namw}}</h2>
+                    <p class="text-gray-700 mb-2">Date:{{trip.rideDate}}</p>
+                    <p class="text-gray-700 mb-2">Location: {{trip.departure}}</p>
+                    <p class="text-gray-700 mb-4">Description: {{trip.descroption}}</p>
                     <div class="flex flex-row justify-center space-x-4 overflow-x-auto mb-4">
-                        <img class="w-72 h-72 object-cover object-center" src="https://via.placeholder.com/400x400" alt="Trip Image 1">
-                        <img class="w-72 h-72 object-cover object-center" src="https://via.placeholder.com/400x400" alt="Trip Image 2">
+                        <img class="w-72 h-72 object-cover object-center" src="{{trimp.image.url}}" alt="Trip Image 1">
+
                     </div>
                     <div class="flex items-center space-x-4 text-gray-700 mb-4">
                         <span><i class="far fa-thumbs-up"></i> 15 Likes</span>
@@ -58,6 +60,7 @@
                         </form>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
