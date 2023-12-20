@@ -37,6 +37,10 @@ body{
     color:#7f3af3;
 }
 
+.border-primary{
+    border: 2px #070926 solid;
+}
+
 .border-sec{
     border: 2px#7f3af3 solid;
 }

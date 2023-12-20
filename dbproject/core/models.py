@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+from django.conf import settings
 
 # Create your models here.
 
@@ -21,7 +22,7 @@ EMOJI_CHOICES = (
 
 class Person(models.Model):
     id_prefix = 'P'
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     personID = models.CharField(max_length=50, blank=True, primary_key=True)
     gender = models.CharField(max_length=100,choices=GENDER_CHOICES)
     image = models.ImageField(upload_to='person_images/', blank=True)
@@ -53,7 +54,7 @@ class Trip(models.Model):
     isCompleted = models.BooleanField(default=False)
     isFeatured = models.BooleanField(default=False)
     isBookmarked = models.BooleanField(default=False)
-    participants = models.ManyToManyField('Person', default='', null=True, blank=True, related_name='participants')
+    participants = models.ManyToManyField('Person', default='', blank=True, related_name='participants')
     def save(self, *args, **kwargs):
         if not self.tripID:
             current_year = str(datetime.now().year)[-2:]
@@ -151,11 +152,10 @@ class Reaction(models.Model):
 class Advertisement(models.Model):
     id_prefix="A"
     adID = models.AutoField( blank=True, primary_key=True)
-    postID = models.ForeignKey('Post', on_delete=models.CASCADE)
+    postID = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True)
     duration = models.DateTimeField()
-    branchID = models.ForeignKey('Branch', on_delete=models.CASCADE)
+    branchID = models.ForeignKey('Branch', on_delete=models.CASCADE, blank=True, null=True)
     advertiser = models.ForeignKey('Organization', on_delete=models.CASCADE)
-    location = models.CharField(max_length=255)
     adLink = models.URLField()
     image = models.ImageField(blank=True, upload_to='ad_images/')
 

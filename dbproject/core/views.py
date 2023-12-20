@@ -18,10 +18,10 @@ lebanon_facts = [
     "Lebanon boasts Jeita Grotto, a natural wonder featuring breathtaking limestone formations and an underground river.",
     "Lebanon is a linguistic playground; Arabic is official, but French and English are widely spoken, reflecting its diverse heritage.",
     "The coastal city of Byblos, one of the oldest continuously inhabited cities, showcases Lebanon's deep connection to Phoenician history.",
-    "Indulge in Lebanese sweets like baklava and ma'amoul, where every bite is a burst of honey, nuts, and exquisite flavors.",
+    "You can indulge in Lebanese sweets like baklava and ma'amoul, where every bite is a burst of honey, nuts, and exquisite flavors.",
     "A sip on Lebanese coffee, a symbol of hospitality, is served strong and often with a touch of cardamom.",
     "Lebanon's compact size allows you to ski in the morning in the mountain resorts and relax on the Mediterranean beaches in the afternoon.",
-    "Visit the Cedar Forest, a UNESCO site, and stand among ancient cedar trees, some over a thousand years old, symbolizing Lebanon's endurance."
+    "You can visit the Cedar Forest, a UNESCO site, and stand among ancient cedar trees, some over a thousand years old, symbolizing Lebanon's endurance."
 ]
 
 img_placeholders = [
@@ -244,7 +244,7 @@ def save_org(request):
                             'A user with this email already exists.'))
 
     context = {'form': form}
-    return render(request, 'signupUser.html', context)
+    return render(request, 'signupOrg.html', context)
 
 
 def check_email_availability(request):
@@ -327,3 +327,31 @@ def create_car(request):
         return redirect('userProfile')
     context = {}
     return render(request, 'createCar.html', context)
+
+def create_ad(request):
+    logged_org = request.user.organization
+    branches = Branch.objects.filter(orgID=logged_org)
+    if request.method == 'POST':
+        adID = request.POST.get('ad_id')
+        postID = request.POST.get('post_id')
+        duration = request.POST.get('duration')
+        branchID = request.POST.get('branchID')
+        advertiser = logged_org
+        location = request.POST.get('location')
+        adLink = request.POST.get('adLink')
+        image = request.FILES.get('image')
+        ad = Advertisement.objects.create(
+            adID = adID,
+            postID = postID,
+            duration = duration,
+            branchID = branchID,
+            advertiser = advertiser,
+            location = location,
+            adLink = adLink,
+            image = image
+        )
+        return redirect('home')
+    context = {
+        "branches": branches,
+    }
+    return render(request, 'createAd.html', context)

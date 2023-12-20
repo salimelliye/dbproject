@@ -37,7 +37,6 @@
 html {
   line-height: 1.5;
   /* 1 */
-
   /* 2 */
   -moz-tab-size: 4;
   /* 3 */
@@ -3426,6 +3425,10 @@ details.collapse summary::-webkit-details-marker {
   height: 100vh;
 }
 
+.min-h-screen {
+  min-height: 100vh;
+}
+
 .w-1 {
   width: 0.25rem;
 }
@@ -3652,6 +3655,10 @@ details.collapse summary::-webkit-details-marker {
   justify-content: space-between;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
 .justify-evenly {
   justify-content: space-evenly;
 }
@@ -3789,6 +3796,11 @@ details.collapse summary::-webkit-details-marker {
 .border-pink-400 {
   --tw-border-opacity: 1;
   border-color: rgb(244 114 182 / var(--tw-border-opacity));
+}
+
+.border-primary {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
 }
 
 .border-purple-500 {
@@ -3945,6 +3957,10 @@ details.collapse summary::-webkit-details-marker {
   padding: 1.25rem;
 }
 
+.p-6 {
+  padding: 1.5rem;
+}
+
 .p-8 {
   padding: 2rem;
 }
@@ -4030,6 +4046,11 @@ details.collapse summary::-webkit-details-marker {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .text-6xl {
