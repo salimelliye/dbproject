@@ -36,6 +36,7 @@ urlpatterns = [
 
     #Authentication
     path('signupuser/', views.save_person, name='signupuser'),
+    path('signupOrg/', views.save_org, name='signupOrg'),
     path('check-email-availability/', views.check_email_availability, name='check-email-availability'),
     
     # Add friends list url + template 

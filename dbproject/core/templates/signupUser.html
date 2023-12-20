@@ -90,17 +90,16 @@
                 </div>
             </div>
           </section>
-          <script>
-            // FETCH THE ENTERED EMAIL AND DISPLAY IT IN THE HIDDEN USERNAME INPUT TAG
-            const emailInput = document.getElementById('email');
-                const usernameInput = document.getElementById('username');
+    <script>
+        // FETCH THE ENTERED EMAIL AND DISPLAY IT IN THE HIDDEN USERNAME INPUT TAG
+        const emailInput = document.getElementById('email');
+        const usernameInput = document.getElementById('username');
 
-                emailInput.addEventListener('input', function () {
-                    const lowercaseEmail = emailInput.value.toLowerCase();
-                    usernameInput.value = lowercaseEmail;
-                });
-        </script>
-        <script>
+        emailInput.addEventListener('input', function () {
+            const lowercaseEmail = emailInput.value.toLowerCase();
+            usernameInput.value = lowercaseEmail;
+        });
+
         function validateEmail() {
             const emailInput = document.getElementById("email");
             const emailError = document.getElementById("emailError");
@@ -132,9 +131,9 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-    validateEmail();
-});
-        </script>
+            validateEmail();
+        });
+    </script>
     </body>
 
 </html>    

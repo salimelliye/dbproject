@@ -119,8 +119,10 @@ def trip_details(request, trip_id):
 def user_profile(request, *args, **kwargs):
     logged_person = request.user.person
     my_cars = Vehicle.objects.filter(userID=logged_person).order_by('-plateNb')
+    my_trips = Trip.objects.filter(userID = request.user.person).order_by('-rideDate')
     context = {
         "cars": my_cars,
+        'my_trips' : my_trips,
     }
     return render(request, 'profile.html', context)
 
@@ -161,6 +163,49 @@ def save_person(request):
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 auth_login(request, user)  # Log in the user
+
+                # Redirect the user to the home page
+                return redirect('home')
+            else:
+                error_message = 'User authentication failed. Please try logging in.'
+                messages.error(request, error_message)
+
+        else:
+            print('Form is not valid. Errors:')
+            print(form.errors)
+
+            for field in form:
+                for error in field.errors:
+                    if "A user with that username already exists." in error:
+                        # Replace the generic error message with a custom one for the email field
+                        form.add_error('email', forms.ValidationError(
+                            'A user with this email already exists.'))
+
+    context = {'form': form}
+    return render(request, 'signupUser.html', context)
+
+def save_org(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email').lower() 
+            password = form.cleaned_data.get('password2')
+            org = User.objects.create_user(
+                username=email,
+                email=email,
+                password=password,
+            )
+            org.name = form.cleaned_data['orgName'].lower().capitalize()
+            org.save()
+
+            org = Organization.objects.create(
+                user=org,
+            )
+            
+            org = authenticate(request, username=email, password=password)
+            if org is not None:
+                auth_login(request, org)  # Log in the user
 
                 # Redirect the user to the home page
                 return redirect('home')

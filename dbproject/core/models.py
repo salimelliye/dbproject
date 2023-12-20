@@ -77,7 +77,6 @@ class Organization(models.Model):
     orgName = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='org_logos/', blank=True)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
 
     def save(self, *args, **kwargs):
         if not self.orgID:
