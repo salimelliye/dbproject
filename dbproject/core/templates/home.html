@@ -77,7 +77,7 @@
     <iframe class="row-start-3 col-start-1 col-span-2" src="https://calendar.google.com/calendar/embed?src=0b6c9754170ada09a51e559d41b946979fd9a7f036e8e97029af81d51a7583bd%40group.calendar.google.com&ctz=Asia%2FBeirut" style="border: 0" width="900" height="200" frameborder="0" scrolling="no"></iframe>
     <!-- Ad Box -->
     <div class="border-primary flex justify-center items-center p-4 row-start-3 row-span-2 col-start-3 h-full text-center rounded-2xl">
-        {% if not request.user.organization %}
+        {% if request.user.organization %}
         <div class="grid grid-cols-2">
             <div class="col-span-1 p-6 flex flex-col items-start justify-between">
                 <h1 class="text-3xl font-bold mb-4 text-left">Boost your Reach with KZ Ads!</h1>

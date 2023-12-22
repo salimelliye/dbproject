@@ -34,6 +34,7 @@ urlpatterns = [
     path('feed/', views.feed, name='feed'),
     path('createCar/', views.create_car, name='createCar'),
     path('createAd/', views.create_ad, name='createAd'),
+    path('frontendLogout/', views.frontend_logout, name='frontendLogout'),
     path('mark_trip_completed/<str:trip_id>/', views.mark_trip_completed, name='mark_trip_completed'),
 
 

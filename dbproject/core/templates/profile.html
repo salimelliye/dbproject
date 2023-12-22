@@ -6,7 +6,7 @@
         <div class="w-full max-w-7xl h-3/4 bg-light rounded-lg shadow p-5 grid grid-cols-1 md:grid-cols-2 gap-8 mx-4 relative">
             <div class="mt-6">
                 <div class="flex items-center space-x-8">
-                    <img class="w-32 h-32 object-cover rounded-full" src="https://via.placeholder.com/200" alt="Profile Image">
+                    <img class="w-32 h-32 object-cover rounded-full" src="{{request.user.person.image.url}}" alt="Profile Image">
                     <div class="mt-4">
                         <h1 class="text-2xl font-bold leading-tight tracking-tight md:text-3xl color-sec mb-2">
                             {{request.user.first_name}} {{request.user.last_name}}
@@ -32,7 +32,7 @@
             </div>
 
             <div class="mx-8">
-                <button class="bg-sec text-white font-medium rounded-lg px-4 py-2.5 absolute top-4 right-4 focus:outline-none focus:ring-4 focus:ring-primary-300">Add as a friend</button>
+                <a href="{% url 'frontendLogout' %}"><button class="bg-sec text-white font-medium rounded-lg px-4 py-2.5 absolute top-4 right-4 focus:outline-none focus:ring-4 focus:ring-primary-300">Logout</button></a>
                 <h2 class="text-xl font-bold mb-2 mt-6">Friends</h2>
                 <div class="space-y-4">
                     <!-- Card 1 -->

@@ -10,6 +10,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login, logout
+
 # Create your views here.
 lebanon_facts = [
     "Lebanon introduced the world to mezze, a delightful array of small dishes like hummus, tabbouleh, and falafel. Perfect for sharing.",
@@ -148,9 +150,13 @@ def user_profile(request, *args, **kwargs):
 
 
 def feed(request, *args, **kwargs):
-    logged_in_user = request.user 
+    logged_in_user = request.user.person
     user_friends = logged_in_user.friends.all()
-    featured_trips_of_friends = Trip.objects.filter(userID__in=user_friends, isFeatured=True)
+
+    user_friends_ids = user_friends.values_list('friendID', flat=True)
+    print(user_friends_ids)
+
+    featured_trips_of_friends = Trip.objects.filter(userID__in=user_friends_ids, isFeatured=True)
     context = {
 
         'featured_trips_of_friends' : featured_trips_of_friends,
@@ -169,6 +175,7 @@ def save_person(request):
         if form.is_valid():
             email = form.cleaned_data.get('email').lower() 
             password = form.cleaned_data.get('password2')
+            image = request.FILES.get('image')
             user = User.objects.create_user(
                 username=email,
                 email=email,
@@ -182,6 +189,7 @@ def save_person(request):
                 user=user,
                 gender=gender,
                 dob=date_of_birth,
+                image = image,
             )
             
             user = authenticate(request, username=email, password=password)
@@ -366,3 +374,8 @@ def create_ad(request):
         "branches": branches,
     }
     return render(request, 'createAd.html', context)
+
+def frontend_logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('landing')

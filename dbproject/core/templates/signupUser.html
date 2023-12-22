@@ -20,7 +20,7 @@
                         <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl color-primary">
                             Create an account
                         </h1>
-                        <form class="space-y-4 md:space-y-6" method="POST" action="{% url 'signupuser' %}">
+                        <form class="space-y-4 md:space-y-6" method="POST" action="{% url 'signupuser' %}" enctype="multipart/form-data">
                             {% csrf_token %}
 
                             <div class="flex flex-row">
